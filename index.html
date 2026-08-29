@@ -4,230 +4,681 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Demavinsky Games</title>
+  <title>Demavinsky Games — Independent Game Studio</title>
+  <meta name="description" content="Demavinsky Games creates polished, accessible mobile games designed for simple, satisfying play." />
+  <meta name="theme-color" content="#090909" />
 
-  <meta
-    name="description"
-    content="Demavinsky Games is an independent game studio focused on creating simple, polished and accessible mobile games."
-  />
+  <meta property="og:title" content="Demavinsky Games" />
+  <meta property="og:description" content="Independent game studio creating polished, accessible mobile games." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://demavinsky.com.br/" />
+  <meta property="og:image" content="https://demavinsky.com.br/assets/demavinsky-logo.png" />
+
+  <link rel="icon" href="assets/demavinsky-symbol.png" />
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --bg: #090909;
+      --surface: #111111;
+      --surface-2: #1a1a1a;
+      --border: #252525;
+      --border-strong: #3c3c3c;
+      --text: #f5f5f5;
+      --muted: #bfc3c8;
+      --soft: #6e737a;
+      --max: 1180px;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
-      background: #050505;
-      color: #f5f5f5;
-      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 82% 8%, rgba(255,255,255,.035), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
 
     .container {
-      width: min(1100px, 90%);
+      width: min(var(--max), 90%);
       margin: 0 auto;
     }
 
-    header {
-      min-height: 100vh;
+    .topbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      background: rgba(9,9,9,.82);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      backdrop-filter: blur(18px);
+    }
+
+    .topbar-inner {
+      min-height: 66px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      border-bottom: 1px solid #222;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
+
+    .language-bar { display: flex; gap: 7px; }
+
+    .language-button {
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 7px 10px;
+      cursor: pointer;
+      font-size: .78rem;
+      letter-spacing: .04em;
+      transition: .18s ease;
+    }
+
+    .language-button:hover,
+    .language-button.active {
+      color: var(--bg);
+      background: var(--text);
+      border-color: var(--text);
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      padding: 128px 0 84px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -12%;
+      top: 50%;
+      width: 44vw;
+      height: 44vw;
+      max-width: 660px;
+      max-height: 660px;
+      transform: translateY(-46%);
+      background: url("assets/demavinsky-symbol.png") center/contain no-repeat;
+      opacity: .055;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr);
+      gap: 76px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-copy { max-width: 760px; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-size: .76rem;
+      margin-bottom: 21px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--soft);
     }
 
     .hero h1 {
-      font-size: clamp(2.8rem, 8vw, 6rem);
-      letter-spacing: -0.05em;
-      margin-bottom: 12px;
+      font-size: clamp(3.3rem, 6.7vw, 6.4rem);
+      line-height: .98;
+      letter-spacing: -.065em;
     }
 
-    .hero p {
-      color: #aaa;
-      font-size: 1.1rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .hero-lead {
+      margin-top: 26px;
+      max-width: 690px;
+      color: var(--muted);
+      font-size: clamp(1.08rem, 1.8vw, 1.38rem);
+      line-height: 1.5;
     }
 
-    section {
-      padding: 100px 0;
-      border-bottom: 1px solid #1c1c1c;
-    }
-
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 24px;
-    }
-
-    .text {
-      max-width: 680px;
-      color: #bdbdbd;
-      font-size: 1.05rem;
-    }
-
-    .game-card {
-      margin-top: 30px;
-      border: 1px solid #333;
-      background: #0d0d0d;
-      border-radius: 14px;
-      padding: 30px;
-      max-width: 520px;
-    }
-
-    .game-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 6px;
-    }
-
-    .status {
-      color: #8d8d8d;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .links {
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 30px;
+      gap: 12px;
+      margin-top: 33px;
     }
 
     .button {
-      display: inline-block;
-      padding: 12px 20px;
-      border: 1px solid #555;
-      border-radius: 8px;
-      transition: 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid var(--border-strong);
+      border-radius: 9px;
+      transition: .18s ease;
+      font-size: .93rem;
     }
 
-    .button:hover {
-      background: #f5f5f5;
-      color: #050505;
+    .button.primary {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+      font-weight: 700;
+    }
+
+    .button:hover { transform: translateY(-1px); border-color: var(--muted); }
+    .button.primary:hover { background: var(--muted); }
+
+    .hero-brand {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 470px;
+    }
+
+    .hero-logo {
+      width: min(100%, 480px);
+      max-height: 480px;
+      object-fit: contain;
+      filter: drop-shadow(0 18px 50px rgba(0,0,0,.42));
+    }
+
+    section {
+      position: relative;
+      overflow: hidden;
+      padding: 96px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.5fr;
+      gap: 72px;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about::after {
+      content: "";
+      position: absolute;
+      left: -120px;
+      bottom: -240px;
+      width: 500px;
+      height: 700px;
+      background: url("assets/demavinsky-symbol.png") center/contain no-repeat;
+      opacity: .035;
+      pointer-events: none;
+    }
+
+    .section-kicker {
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .76rem;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4.1vw, 3.25rem);
+      letter-spacing: -.045em;
+      line-height: 1.06;
+    }
+
+    .text {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .games-list { display: grid; gap: 18px; }
+
+    .game-card {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.025), transparent), var(--surface);
+      border-radius: 16px;
+      padding: 28px;
+      transition: .2s ease;
+    }
+
+    .game-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+    }
+
+    .game-topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .game-card h3 {
+      font-size: 1.65rem;
+      letter-spacing: -.035em;
+      line-height: 1.1;
+    }
+
+    .status {
+      flex: none;
+      padding: 6px 9px;
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: .7rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .game-description {
+      color: var(--muted);
+      max-width: 650px;
+      margin-bottom: 20px;
+    }
+
+    .game-meta { display: flex; flex-wrap: wrap; gap: 9px; }
+
+    .meta-chip {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 5px 9px;
+      color: var(--soft);
+      font-size: .75rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 16px;
+      margin-top: 30px;
+      max-width: 780px;
+    }
+
+    .contact-card {
+      display: block;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      background: var(--surface);
+      transition: .18s ease;
+    }
+
+    .contact-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-1px);
+    }
+
+    .contact-label {
+      color: var(--soft);
+      font-size: .74rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 6px;
+    }
+
+    .contact-value {
+      font-weight: 650;
+      overflow-wrap: anywhere;
     }
 
     footer {
-      padding: 40px 0;
-      color: #777;
-      font-size: 0.9rem;
+      padding: 38px 0 48px;
+      color: var(--soft);
+      font-size: .88rem;
     }
 
     .footer-content {
       display: flex;
       justify-content: space-between;
-      gap: 20px;
+      align-items: center;
+      gap: 18px;
       flex-wrap: wrap;
     }
 
-    footer a:hover {
-      color: #fff;
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    @media (max-width: 600px) {
-      section {
-        padding: 70px 0;
+    .footer-symbol {
+      width: 24px;
+      height: 34px;
+      object-fit: contain;
+      opacity: .85;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 920px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 46px;
       }
 
-      .hero h1 {
-        font-size: 3rem;
+      .hero-brand {
+        min-height: 0;
+        justify-content: flex-start;
       }
+
+      .hero-logo {
+        width: min(68vw, 390px);
+      }
+
+      .hero::after {
+        right: -28%;
+        width: 72vw;
+        height: 72vw;
+        opacity: .04;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 126px 0 86px;
+      }
+
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .topbar-inner { min-height: 58px; }
+      .brand span:last-child { display: none; }
+      .brand-logo { width: 34px; height: 34px; }
+
+      .hero h1 { font-size: clamp(3rem, 15vw, 4.6rem); }
+      .hero-logo { width: min(78vw, 340px); }
+      section { padding: 72px 0; }
+      .game-topline { flex-direction: column; }
+      .footer-content { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 
 <body>
+  <nav class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#top" aria-label="Demavinsky Games home">
+        <img class="brand-logo" src="assets/demavinsky-logo.png" alt="Demavinsky Games logo" />
+        <span>Demavinsky Games</span>
+      </a>
 
-  <header>
-    <div class="container hero">
-      <h1>Demavinsky Games</h1>
-      <p>Independent Game Studio</p>
+      <div class="language-bar" aria-label="Language selector">
+        <button class="language-button" data-lang="pt" type="button">PT</button>
+        <button class="language-button" data-lang="en" type="button">EN</button>
+        <button class="language-button" data-lang="es" type="button">ES</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow" data-i18n="eyebrow">Independent Game Studio</div>
+
+        <h1 data-i18n="heroTitle">Games made to feel simple, polished and satisfying.</h1>
+
+        <p class="hero-lead" data-i18n="heroLead">
+          We create accessible mobile games designed for quick sessions, clean interaction and lasting replayability.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button primary" href="#games" data-i18n="seeGames">See our games</a>
+          <a class="button" href="#contact" data-i18n="contactUs">Contact us</a>
+        </div>
+      </div>
+
+      <div class="hero-brand" aria-label="Demavinsky Games visual identity">
+        <img class="hero-logo" src="assets/demavinsky-logo.png" alt="Demavinsky Games" />
+      </div>
     </div>
   </header>
 
   <main>
+    <section class="about" id="about">
+      <div class="container section-grid">
+        <div>
+          <p class="section-kicker" data-i18n="studioKicker">Studio</p>
+          <h2 data-i18n="aboutTitle">Built for simple, satisfying play.</h2>
+        </div>
 
-    <section id="about">
-      <div class="container">
-        <h2>About</h2>
-
-        <p class="text">
-          Demavinsky Games is an independent game studio focused on creating
-          simple, polished and accessible mobile games.
-        </p>
+        <div>
+          <p class="text" data-i18n="aboutText">
+            Demavinsky Games is an independent studio focused on creating mobile games that are easy to understand, polished to play and enjoyable in short or long sessions.
+          </p>
+        </div>
       </div>
     </section>
 
     <section id="games">
-      <div class="container">
-        <h2>Games</h2>
+      <div class="container section-grid">
+        <div>
+          <p class="section-kicker" data-i18n="gamesKicker">Games</p>
+          <h2 data-i18n="gamesTitle">Our games</h2>
+        </div>
 
-        <div class="game-card">
-          <h3>Classic Grid Blocks</h3>
-          <p class="status">Coming soon</p>
+        <div class="games-list">
+          <article class="game-card">
+            <div class="game-topline">
+              <h3>Classic Grid Blocks</h3>
+              <span class="status" data-i18n="comingSoon">Coming soon</span>
+            </div>
+
+            <p class="game-description" data-i18n="gameDescription">
+              A clean and colorful block puzzle built for quick, satisfying sessions with simple controls and a polished mobile experience.
+            </p>
+
+            <div class="game-meta">
+              <span class="meta-chip">Mobile</span>
+              <span class="meta-chip">Puzzle</span>
+              <span class="meta-chip">Android</span>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <section id="contact">
-      <div class="container">
-        <h2>Contact</h2>
+      <div class="container section-grid">
+        <div>
+          <p class="section-kicker" data-i18n="contactKicker">Contact</p>
+          <h2 data-i18n="contactTitle">Talk to Demavinsky Games</h2>
+        </div>
 
-        <p class="text">
-          For support, business inquiries and general contact:
-        </p>
+        <div>
+          <p class="text" data-i18n="contactText">
+            Use the channels below for support, business inquiries or general contact.
+          </p>
 
-        <div class="links">
-          <a
-            class="button"
-            href="mailto:support@demavinsky.com.br"
-          >
-            support@demavinsky.com.br
-          </a>
+          <div class="contact-grid">
+            <a class="contact-card" href="mailto:support@demavinsky.com.br">
+              <div class="contact-label" data-i18n="supportLabel">Support</div>
+              <div class="contact-value">support@demavinsky.com.br</div>
+            </a>
 
-          <a
-            class="button"
-            href="https://www.instagram.com/demavinsky/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Instagram
-          </a>
+            <a class="contact-card" href="mailto:contato@demavinsky.com.br">
+              <div class="contact-label" data-i18n="businessLabel">Business & general</div>
+              <div class="contact-value">contato@demavinsky.com.br</div>
+            </a>
 
-          <a
-            class="button"
-            href="https://x.com/DemavinskyGames"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            X / Twitter
-          </a>
+            <a class="contact-card" href="https://www.instagram.com/demavinsky/" target="_blank" rel="noopener noreferrer">
+              <div class="contact-label">Instagram</div>
+              <div class="contact-value">@demavinsky</div>
+            </a>
+
+            <a class="contact-card" href="https://x.com/DemavinskyGames" target="_blank" rel="noopener noreferrer">
+              <div class="contact-label">X / Twitter</div>
+              <div class="contact-value">@DemavinskyGames</div>
+            </a>
+          </div>
         </div>
       </div>
     </section>
-
   </main>
 
   <footer>
     <div class="container footer-content">
-      <span>© 2026 Demavinsky Games</span>
+      <div class="footer-left">
+        <img class="footer-symbol" src="assets/demavinsky-symbol.png" alt="" aria-hidden="true" />
+        <span>© 2026 Demavinsky Games</span>
+      </div>
 
-      <a href="/privacy">
-        Privacy Policy
-      </a>
+      <div class="footer-links">
+        <a href="https://www.instagram.com/demavinsky/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://x.com/DemavinskyGames" target="_blank" rel="noopener noreferrer">X</a>
+        <a id="privacy-link" href="/privacy#en" data-i18n="privacy">Privacy Policy</a>
+      </div>
     </div>
   </footer>
 
+  <script>
+    const translations = {
+      en: {
+        eyebrow: "Independent Game Studio",
+        heroTitle: "Games made to feel simple, polished and satisfying.",
+        heroLead: "We create accessible mobile games designed for quick sessions, clean interaction and lasting replayability.",
+        seeGames: "See our games",
+        contactUs: "Contact us",
+        studioKicker: "Studio",
+        aboutTitle: "Built for simple, satisfying play.",
+        aboutText: "Demavinsky Games is an independent studio focused on creating mobile games that are easy to understand, polished to play and enjoyable in short or long sessions.",
+        gamesKicker: "Games",
+        gamesTitle: "Our games",
+        comingSoon: "Coming soon",
+        gameDescription: "A clean and colorful block puzzle built for quick, satisfying sessions with simple controls and a polished mobile experience.",
+        contactKicker: "Contact",
+        contactTitle: "Talk to Demavinsky Games",
+        contactText: "Use the channels below for support, business inquiries or general contact.",
+        supportLabel: "Support",
+        businessLabel: "Business & general",
+        privacy: "Privacy Policy"
+      },
+
+      pt: {
+        eyebrow: "Estúdio Independendente de Jogos",
+        heroTitle: "Jogos feitos para serem simples, bem-acabados e satisfatórios.",
+        heroLead: "Criamos jogos mobile acessíveis, pensados para partidas rápidas, interação limpa e vontade de jogar novamente.",
+        seeGames: "Ver nossos jogos",
+        contactUs: "Fale conosco",
+        studioKicker: "Estúdio",
+        aboutTitle: "Feito para jogar de forma simples e satisfatória.",
+        aboutText: "A Demavinsky Games é um estúdio independente focado em criar jogos mobile fáceis de entender, bem-acabados e agradáveis tanto em partidas rápidas quanto em sessões mais longas.",
+        gamesKicker: "Jogos",
+        gamesTitle: "Nossos jogos",
+        comingSoon: "Em breve",
+        gameDescription: "Um block puzzle clean e colorido, criado para partidas rápidas e satisfatórias, com controles simples e uma experiência mobile bem-acabada.",
+        contactKicker: "Contato",
+        contactTitle: "Fale com a Demavinsky Games",
+        contactText: "Use os canais abaixo para suporte, assuntos comerciais ou contato geral.",
+        supportLabel: "Suporte",
+        businessLabel: "Comercial e geral",
+        privacy: "Política de Privacidade"
+      },
+
+      es: {
+        eyebrow: "Estudio Independiente de Videojuegos",
+        heroTitle: "Juegos creados para sentirse simples, cuidados y satisfactorios.",
+        heroLead: "Creamos juegos móviles accesibles, pensados para sesiones rápidas, interacción limpia y ganas de volver a jugar.",
+        seeGames: "Ver nuestros juegos",
+        contactUs: "Contáctanos",
+        studioKicker: "Estudio",
+        aboutTitle: "Diseñado para jugar de forma simple y satisfactoria.",
+        aboutText: "Demavinsky Games es un estudio independiente centrado en crear juegos móviles fáciles de entender, cuidados al jugar y agradables tanto en partidas rápidas como en sesiones más largas.",
+        gamesKicker: "Juegos",
+        gamesTitle: "Nuestros juegos",
+        comingSoon: "Próximamente",
+        gameDescription: "Un block puzzle limpio y colorido, creado para partidas rápidas y satisfactorias, con controles simples y una experiencia móvil cuidada.",
+        contactKicker: "Contacto",
+        contactTitle: "Habla con Demavinsky Games",
+        contactText: "Utiliza los canales a continuación para soporte, consultas comerciales o contacto general.",
+        supportLabel: "Soporte",
+        businessLabel: "Comercial y general",
+        privacy: "Política de Privacidad"
+      }
+    };
+
+    const privacyAnchors = { en: "#en", pt: "#pt", es: "#es" };
+
+    function applyLanguage(lang) {
+      const selected = translations[lang] ? lang : "en";
+      document.documentElement.lang = selected === "pt" ? "pt-BR" : selected;
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+        if (translations[selected][key]) {
+          element.textContent = translations[selected][key];
+        }
+      });
+
+      document.querySelectorAll(".language-button").forEach((button) => {
+        button.classList.toggle("active", button.dataset.lang === selected);
+      });
+
+      document.getElementById("privacy-link").href = "/privacy" + privacyAnchors[selected];
+      localStorage.setItem("demavinsky-language", selected);
+    }
+
+    document.querySelectorAll(".language-button").forEach((button) => {
+      button.addEventListener("click", () => applyLanguage(button.dataset.lang));
+    });
+
+    const savedLanguage = localStorage.getItem("demavinsky-language");
+    const browserLanguage = (navigator.language || "en").toLowerCase();
+    let initialLanguage = "en";
+
+    if (savedLanguage && translations[savedLanguage]) {
+      initialLanguage = savedLanguage;
+    } else if (browserLanguage.startsWith("pt")) {
+      initialLanguage = "pt";
+    } else if (browserLanguage.startsWith("es")) {
+      initialLanguage = "es";
+    }
+
+    applyLanguage(initialLanguage);
+  </script>
 </body>
 </html>

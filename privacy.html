@@ -4,495 +4,567 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Privacy Policy | Demavinsky Games</title>
+  <title>Privacy Policy — Demavinsky Games</title>
+  <meta name="description" content="Privacy Policy for Demavinsky Games in English, Portuguese and Spanish." />
+  <meta name="theme-color" content="#090909" />
 
-  <meta
-    name="description"
-    content="Privacy Policy for Demavinsky Games in English, Portuguese and Spanish."
-  />
+  <link rel="icon" href="assets/demavinsky-symbol.png" />
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --bg: #090909;
+      --surface: #111111;
+      --border: #252525;
+      --border-strong: #3c3c3c;
+      --text: #f5f5f5;
+      --muted: #bfc3c8;
+      --soft: #6e737a;
+      --max: 980px;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
-      background: #050505;
-      color: #f5f5f5;
-      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 85% 4%, rgba(255,255,255,.035), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      color: #d0d0d0;
-    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
 
     .container {
-      width: min(900px, 90%);
+      width: min(var(--max), 90%);
       margin: 0 auto;
-      padding: 70px 0;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(9,9,9,.86);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      backdrop-filter: blur(18px);
+    }
+
+    .topbar-inner {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
+
+    .language-bar {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .language-button {
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 7px 10px;
+      cursor: pointer;
+      font-size: .78rem;
+      letter-spacing: .04em;
+      transition: .18s ease;
+    }
+
+    .language-button:hover,
+    .language-button.active {
+      color: var(--bg);
+      background: var(--text);
+      border-color: var(--text);
+    }
+
+    .hero {
+      padding: 74px 0 54px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      top: -120px;
+      width: 390px;
+      height: 540px;
+      background: url("assets/demavinsky-symbol.png") center/contain no-repeat;
+      opacity: .035;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .76rem;
+      margin-bottom: 10px;
     }
 
     h1 {
-      font-size: clamp(2.4rem, 7vw, 4.5rem);
-      margin-bottom: 10px;
-      letter-spacing: -0.04em;
+      font-size: clamp(2.6rem, 6vw, 4.7rem);
+      line-height: 1;
+      letter-spacing: -.055em;
+      max-width: 760px;
     }
 
-    h2 {
-      margin-top: 38px;
-      margin-bottom: 12px;
-      font-size: 1.45rem;
+    .intro {
+      color: var(--muted);
+      max-width: 720px;
+      margin-top: 18px;
+      font-size: 1.04rem;
     }
 
-    p,
-    li {
-      color: #bdbdbd;
-    }
-
-    ul {
-      margin: 12px 0 0 24px;
-    }
-
-    .back {
-      display: inline-block;
-      margin-bottom: 28px;
-      text-decoration: none;
-      border: 1px solid #444;
-      padding: 9px 14px;
-      border-radius: 7px;
-    }
-
-    .back:hover,
-    .language-nav a:hover {
-      background: #f5f5f5;
-      color: #050505;
-    }
-
-    .language-nav {
+    .shortcut-bar {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin: 22px 0 44px;
+      margin-top: 26px;
     }
 
-    .language-nav a {
-      text-decoration: none;
-      border: 1px solid #444;
-      padding: 9px 14px;
-      border-radius: 7px;
+    .shortcut {
+      border: 1px solid var(--border-strong);
+      border-radius: 9px;
+      padding: 9px 13px;
+      color: var(--muted);
+      transition: .18s ease;
     }
 
-    .policy-section {
-      padding-top: 20px;
-      margin-top: 20px;
+    .shortcut:hover {
+      color: var(--bg);
+      background: var(--text);
+      border-color: var(--text);
     }
 
-    .policy-section + .policy-section {
-      margin-top: 85px;
-      padding-top: 55px;
-      border-top: 1px solid #222;
+    .policy {
+      padding: 62px 0;
+      border-bottom: 1px solid var(--border);
+      scroll-margin-top: 86px;
+    }
+
+    .policy + .policy {
+      padding-top: 74px;
+    }
+
+    .policy-header {
+      margin-bottom: 34px;
+    }
+
+    .policy h2 {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      letter-spacing: -.045em;
+      line-height: 1.08;
+      margin-bottom: 9px;
     }
 
     .updated {
-      color: #888;
-      margin-bottom: 38px;
+      color: var(--soft);
+      font-size: .9rem;
     }
 
-    .top-link {
+    .policy h3 {
+      font-size: 1.28rem;
+      margin-top: 30px;
+      margin-bottom: 8px;
+      letter-spacing: -.02em;
+    }
+
+    .policy p,
+    .policy li {
+      color: var(--muted);
+    }
+
+    .policy ul {
+      margin: 10px 0 0 22px;
+    }
+
+    .policy li + li {
+      margin-top: 5px;
+    }
+
+    .policy a.inline {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .back-top {
       display: inline-block;
       margin-top: 32px;
-      font-size: 0.9rem;
+      color: var(--soft);
+      font-size: .9rem;
     }
 
+    .back-top:hover { color: var(--text); }
+
     footer {
-      margin-top: 70px;
-      padding-top: 30px;
-      border-top: 1px solid #222;
-      color: #777;
-      font-size: 0.9rem;
+      padding: 38px 0 48px;
+      color: var(--soft);
+      font-size: .88rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-symbol {
+      width: 24px;
+      height: 34px;
+      object-fit: contain;
+      opacity: .85;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 560px) {
+      .brand span:last-child { display: none; }
+      .brand-logo { width: 34px; height: 34px; }
+      .hero { padding-top: 58px; }
     }
   </style>
 </head>
 
 <body id="top">
-  <main class="container">
-    <a class="back" href="/">← Demavinsky Games</a>
+  <nav class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="index.html" aria-label="Demavinsky Games home">
+        <img class="brand-logo" src="assets/demavinsky-logo.png" alt="Demavinsky Games logo" />
+        <span>Demavinsky Games</span>
+      </a>
 
-    <h1>Privacy Policy</h1>
-    <p>
-      Choose your language / Escolha seu idioma / Elige tu idioma
-    </p>
+      <div class="language-bar" aria-label="Language selector">
+        <button class="language-button" data-lang="pt" type="button">PT</button>
+        <button class="language-button" data-lang="en" type="button">EN</button>
+        <button class="language-button" data-lang="es" type="button">ES</button>
+      </div>
+    </div>
+  </nav>
 
-    <nav class="language-nav" aria-label="Language shortcuts">
-      <a href="#en">English</a>
-      <a href="#pt">Português</a>
-      <a href="#es">Español</a>
-    </nav>
-
-    <!-- ENGLISH -->
-    <section class="policy-section" id="en" lang="en">
-      <h1>Privacy Policy — English</h1>
-      <p class="updated">Last updated: August 29, 2026</p>
-
-      <p>
-        Demavinsky Games respects your privacy. This Privacy Policy explains how
-        information may be collected, used, and processed when you use our
-        websites, mobile games, and related services.
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow" data-i18n="eyebrow">Legal</p>
+      <h1 data-i18n="pageTitle">Privacy Policy</h1>
+      <p class="intro" data-i18n="intro">
+        Choose your language below to jump directly to the corresponding version of this policy.
       </p>
 
-      <h2>1. Information We May Collect</h2>
-      <p>
-        Our games may collect limited technical and usage information necessary
-        to operate, improve, secure, and monetize the service. This may include:
-      </p>
-      <ul>
-        <li>device and operating system information;</li>
-        <li>app version and language settings;</li>
-        <li>gameplay and feature usage data;</li>
-        <li>crash reports and diagnostic information;</li>
-        <li>advertising identifiers and related ad interaction data, where permitted.</li>
-      </ul>
+      <div class="shortcut-bar" aria-label="Language shortcuts">
+        <a class="shortcut" href="#en">English</a>
+        <a class="shortcut" href="#pt">Português</a>
+        <a class="shortcut" href="#es">Español</a>
+      </div>
+    </div>
+  </header>
 
-      <h2>2. Analytics and Diagnostics</h2>
-      <p>
-        We may use third-party services such as Firebase Analytics and Firebase
-        Crashlytics to understand how our games are used, measure performance,
-        identify technical problems, and improve stability.
-      </p>
+  <main>
+    <section class="policy" id="en" lang="en">
+      <div class="container">
+        <div class="policy-header">
+          <h2>Privacy Policy — English</h2>
+          <p class="updated">Last updated: August 29, 2026</p>
+        </div>
 
-      <h2>3. Advertising</h2>
-      <p>
-        Some Demavinsky Games products may display advertisements through
-        third-party advertising services such as Google AdMob. These services may
-        process device information, advertising identifiers, and ad interaction
-        data in accordance with their own privacy policies and applicable law.
-      </p>
+        <p>Demavinsky Games respects your privacy. This Privacy Policy explains how information may be collected, used, and processed when you use our websites, mobile games, and related services.</p>
 
-      <p>
-        Where required, users may be presented with consent or privacy choices
-        before personalized advertising or related processing takes place.
-      </p>
+        <h3>1. Information We May Collect</h3>
+        <p>Our games may collect limited technical and usage information necessary to operate, improve, secure, and monetize the service. This may include:</p>
+        <ul>
+          <li>device and operating system information;</li>
+          <li>app version and language settings;</li>
+          <li>gameplay and feature usage data;</li>
+          <li>crash reports and diagnostic information;</li>
+          <li>advertising identifiers and related ad interaction data, where permitted.</li>
+        </ul>
 
-      <h2>4. Local Game Data</h2>
-      <p>
-        Some game information, such as settings, preferences, progress, or high
-        scores, may be stored locally on your device.
-      </p>
+        <h3>2. Analytics and Diagnostics</h3>
+        <p>We may use third-party services such as Firebase Analytics and Firebase Crashlytics to understand how our games are used, measure performance, identify technical problems, and improve stability.</p>
 
-      <h2>5. How We Use Information</h2>
-      <p>Information may be used to:</p>
-      <ul>
-        <li>operate and maintain our games and services;</li>
-        <li>improve gameplay, performance, and user experience;</li>
-        <li>diagnose crashes and technical issues;</li>
-        <li>measure usage and product performance;</li>
-        <li>serve and measure advertising;</li>
-        <li>comply with legal and regulatory obligations.</li>
-      </ul>
+        <h3>3. Advertising</h3>
+        <p>Some Demavinsky Games products may display advertisements through third-party advertising services such as Google AdMob. These services may process device information, advertising identifiers, and ad interaction data in accordance with their own privacy policies and applicable law.</p>
+        <p>Where required, users may be presented with consent or privacy choices before personalized advertising or related processing takes place.</p>
 
-      <h2>6. Third-Party Services</h2>
-      <p>
-        Our products may rely on third-party platforms and services. Their handling
-        of information is governed by their respective privacy policies. These may
-        include Google Play Services, Firebase, Google AdMob, and consent management
-        services used to comply with privacy requirements.
-      </p>
+        <h3>4. Local Game Data</h3>
+        <p>Some game information, such as settings, preferences, progress, or high scores, may be stored locally on your device.</p>
 
-      <h2>7. Children's Privacy</h2>
-      <p>
-        Our services are not intended to knowingly collect personal information
-        from children in violation of applicable law. If we become aware that
-        personal information has been collected from a child in a manner that
-        requires parental consent or deletion, we will take appropriate steps.
-      </p>
+        <h3>5. How We Use Information</h3>
+        <p>Information may be used to:</p>
+        <ul>
+          <li>operate and maintain our games and services;</li>
+          <li>improve gameplay, performance, and user experience;</li>
+          <li>diagnose crashes and technical issues;</li>
+          <li>measure usage and product performance;</li>
+          <li>serve and measure advertising;</li>
+          <li>comply with legal and regulatory obligations.</li>
+        </ul>
 
-      <h2>8. Data Retention</h2>
-      <p>
-        Information processed by Demavinsky Games or our service providers is
-        retained only for as long as reasonably necessary for the purposes
-        described in this policy or as required by law.
-      </p>
+        <h3>6. Third-Party Services</h3>
+        <p>Our products may rely on third-party platforms and services. Their handling of information is governed by their respective privacy policies. These may include Google Play Services, Firebase, Google AdMob, and consent management services used to comply with privacy requirements.</p>
 
-      <h2>9. Security</h2>
-      <p>
-        We take reasonable measures to protect information associated with our
-        services. However, no electronic storage or transmission method can be
-        guaranteed to be completely secure.
-      </p>
+        <h3>7. Children's Privacy</h3>
+        <p>Our services are not intended to knowingly collect personal information from children in violation of applicable law. If we become aware that personal information has been collected from a child in a manner that requires parental consent or deletion, we will take appropriate steps.</p>
 
-      <h2>10. Your Privacy Choices</h2>
-      <p>
-        Depending on your location, you may have rights regarding personal data,
-        including access, correction, deletion, objection, or withdrawal of
-        consent. You may contact us to make a privacy-related request.
-      </p>
+        <h3>8. Data Retention</h3>
+        <p>Information processed by Demavinsky Games or our service providers is retained only for as long as reasonably necessary for the purposes described in this policy or as required by law.</p>
 
-      <h2>11. Changes to This Policy</h2>
-      <p>
-        We may update this Privacy Policy from time to time. The current version
-        will be published on this page together with the date of the latest update.
-      </p>
+        <h3>9. Security</h3>
+        <p>We take reasonable measures to protect information associated with our services. However, no electronic storage or transmission method can be guaranteed to be completely secure.</p>
 
-      <h2>12. Contact</h2>
-      <p>
-        For privacy-related questions or requests, contact:
-        <a href="mailto:privacy@demavinsky.com.br">privacy@demavinsky.com.br</a>
-      </p>
+        <h3>10. Your Privacy Choices</h3>
+        <p>Depending on your location, you may have rights regarding personal data, including access, correction, deletion, objection, or withdrawal of consent. You may contact us to make a privacy-related request.</p>
 
-      <a class="top-link" href="#top">↑ Back to language selection</a>
+        <h3>11. Changes to This Policy</h3>
+        <p>We may update this Privacy Policy from time to time. The current version will be published on this page together with the date of the latest update.</p>
+
+        <h3>12. Contact</h3>
+        <p>For privacy-related questions or requests, contact: <a class="inline" href="mailto:privacy@demavinsky.com.br">privacy@demavinsky.com.br</a></p>
+
+        <a class="back-top" href="#top">↑ Back to top</a>
+      </div>
     </section>
 
-    <!-- PORTUGUÊS -->
-    <section class="policy-section" id="pt" lang="pt-BR">
-      <h1>Política de Privacidade — Português</h1>
-      <p class="updated">Última atualização: 29 de agosto de 2026</p>
+    <section class="policy" id="pt" lang="pt-BR">
+      <div class="container">
+        <div class="policy-header">
+          <h2>Política de Privacidade — Português</h2>
+          <p class="updated">Última atualização: 29 de agosto de 2026</p>
+        </div>
 
-      <p>
-        A Demavinsky Games respeita sua privacidade. Esta Política de Privacidade
-        explica como informações podem ser coletadas, utilizadas e processadas
-        quando você utiliza nossos sites, jogos mobile e serviços relacionados.
-      </p>
+        <p>A Demavinsky Games respeita sua privacidade. Esta Política de Privacidade explica como informações podem ser coletadas, utilizadas e processadas quando você utiliza nossos sites, jogos mobile e serviços relacionados.</p>
 
-      <h2>1. Informações que podemos coletar</h2>
-      <p>
-        Nossos jogos podem coletar informações técnicas e de uso limitadas,
-        necessárias para operar, melhorar, proteger e monetizar o serviço. Isso
-        pode incluir:
-      </p>
-      <ul>
-        <li>informações sobre o dispositivo e o sistema operacional;</li>
-        <li>versão do aplicativo e configurações de idioma;</li>
-        <li>dados de uso de recursos e de gameplay;</li>
-        <li>relatórios de falhas e informações de diagnóstico;</li>
-        <li>identificadores de publicidade e dados relacionados à interação com anúncios, quando permitido.</li>
-      </ul>
+        <h3>1. Informações que podemos coletar</h3>
+        <p>Nossos jogos podem coletar informações técnicas e de uso limitadas, necessárias para operar, melhorar, proteger e monetizar o serviço. Isso pode incluir:</p>
+        <ul>
+          <li>informações sobre o dispositivo e o sistema operacional;</li>
+          <li>versão do aplicativo e configurações de idioma;</li>
+          <li>dados de uso de recursos e de gameplay;</li>
+          <li>relatórios de falhas e informações de diagnóstico;</li>
+          <li>identificadores de publicidade e dados relacionados à interação com anúncios, quando permitido.</li>
+        </ul>
 
-      <h2>2. Analytics e diagnóstico</h2>
-      <p>
-        Podemos utilizar serviços de terceiros, como Firebase Analytics e Firebase
-        Crashlytics, para entender como nossos jogos são utilizados, medir
-        desempenho, identificar problemas técnicos e melhorar a estabilidade.
-      </p>
+        <h3>2. Analytics e diagnóstico</h3>
+        <p>Podemos utilizar serviços de terceiros, como Firebase Analytics e Firebase Crashlytics, para entender como nossos jogos são utilizados, medir desempenho, identificar problemas técnicos e melhorar a estabilidade.</p>
 
-      <h2>3. Publicidade</h2>
-      <p>
-        Alguns produtos da Demavinsky Games podem exibir anúncios por meio de
-        serviços de publicidade de terceiros, como o Google AdMob. Esses serviços
-        podem processar informações do dispositivo, identificadores de publicidade
-        e dados de interação com anúncios de acordo com suas próprias políticas de
-        privacidade e com a legislação aplicável.
-      </p>
+        <h3>3. Publicidade</h3>
+        <p>Alguns produtos da Demavinsky Games podem exibir anúncios por meio de serviços de publicidade de terceiros, como o Google AdMob. Esses serviços podem processar informações do dispositivo, identificadores de publicidade e dados de interação com anúncios de acordo com suas próprias políticas de privacidade e com a legislação aplicável.</p>
+        <p>Quando exigido, os usuários poderão receber opções de consentimento ou privacidade antes que publicidade personalizada ou processamentos relacionados sejam realizados.</p>
 
-      <p>
-        Quando exigido, os usuários poderão receber opções de consentimento ou
-        privacidade antes que publicidade personalizada ou processamentos
-        relacionados sejam realizados.
-      </p>
+        <h3>4. Dados locais do jogo</h3>
+        <p>Algumas informações do jogo, como configurações, preferências, progresso ou recordes, podem ser armazenadas localmente no seu dispositivo.</p>
 
-      <h2>4. Dados locais do jogo</h2>
-      <p>
-        Algumas informações do jogo, como configurações, preferências, progresso ou
-        recordes, podem ser armazenadas localmente no seu dispositivo.
-      </p>
+        <h3>5. Como usamos as informações</h3>
+        <p>As informações podem ser utilizadas para:</p>
+        <ul>
+          <li>operar e manter nossos jogos e serviços;</li>
+          <li>melhorar gameplay, desempenho e experiência do usuário;</li>
+          <li>diagnosticar falhas e problemas técnicos;</li>
+          <li>medir uso e desempenho dos produtos;</li>
+          <li>exibir e medir publicidade;</li>
+          <li>cumprir obrigações legais e regulatórias.</li>
+        </ul>
 
-      <h2>5. Como usamos as informações</h2>
-      <p>As informações podem ser utilizadas para:</p>
-      <ul>
-        <li>operar e manter nossos jogos e serviços;</li>
-        <li>melhorar gameplay, desempenho e experiência do usuário;</li>
-        <li>diagnosticar falhas e problemas técnicos;</li>
-        <li>medir uso e desempenho dos produtos;</li>
-        <li>exibir e medir publicidade;</li>
-        <li>cumprir obrigações legais e regulatórias.</li>
-      </ul>
+        <h3>6. Serviços de terceiros</h3>
+        <p>Nossos produtos podem depender de plataformas e serviços de terceiros. O tratamento de informações por esses terceiros é regido por suas próprias políticas de privacidade. Isso pode incluir Google Play Services, Firebase, Google AdMob e serviços de gerenciamento de consentimento utilizados para atender a requisitos de privacidade.</p>
 
-      <h2>6. Serviços de terceiros</h2>
-      <p>
-        Nossos produtos podem depender de plataformas e serviços de terceiros.
-        O tratamento de informações por esses terceiros é regido por suas próprias
-        políticas de privacidade. Isso pode incluir Google Play Services, Firebase,
-        Google AdMob e serviços de gerenciamento de consentimento utilizados para
-        atender a requisitos de privacidade.
-      </p>
+        <h3>7. Privacidade de crianças</h3>
+        <p>Nossos serviços não têm a intenção de coletar conscientemente informações pessoais de crianças em desacordo com a legislação aplicável. Caso tomemos conhecimento de que informações pessoais de uma criança foram coletadas de forma que exija consentimento dos responsáveis ou exclusão, tomaremos as medidas apropriadas.</p>
 
-      <h2>7. Privacidade de crianças</h2>
-      <p>
-        Nossos serviços não têm a intenção de coletar conscientemente informações
-        pessoais de crianças em desacordo com a legislação aplicável. Caso tomemos
-        conhecimento de que informações pessoais de uma criança foram coletadas de
-        forma que exija consentimento dos responsáveis ou exclusão, tomaremos as
-        medidas apropriadas.
-      </p>
+        <h3>8. Retenção de dados</h3>
+        <p>Informações processadas pela Demavinsky Games ou por nossos prestadores de serviço são mantidas somente pelo período razoavelmente necessário para os fins descritos nesta política ou conforme exigido por lei.</p>
 
-      <h2>8. Retenção de dados</h2>
-      <p>
-        Informações processadas pela Demavinsky Games ou por nossos prestadores de
-        serviço são mantidas somente pelo período razoavelmente necessário para os
-        fins descritos nesta política ou conforme exigido por lei.
-      </p>
+        <h3>9. Segurança</h3>
+        <p>Adotamos medidas razoáveis para proteger informações associadas aos nossos serviços. No entanto, nenhum método de armazenamento ou transmissão eletrônica pode ser garantido como completamente seguro.</p>
 
-      <h2>9. Segurança</h2>
-      <p>
-        Adotamos medidas razoáveis para proteger informações associadas aos nossos
-        serviços. No entanto, nenhum método de armazenamento ou transmissão
-        eletrônica pode ser garantido como completamente seguro.
-      </p>
+        <h3>10. Seus direitos e escolhas de privacidade</h3>
+        <p>Dependendo da sua localização, você pode ter direitos relacionados a dados pessoais, incluindo acesso, correção, exclusão, oposição ou retirada de consentimento. Você pode entrar em contato conosco para realizar uma solicitação relacionada à privacidade.</p>
 
-      <h2>10. Seus direitos e escolhas de privacidade</h2>
-      <p>
-        Dependendo da sua localização, você pode ter direitos relacionados a dados
-        pessoais, incluindo acesso, correção, exclusão, oposição ou retirada de
-        consentimento. Você pode entrar em contato conosco para realizar uma
-        solicitação relacionada à privacidade.
-      </p>
+        <h3>11. Alterações nesta política</h3>
+        <p>Podemos atualizar esta Política de Privacidade periodicamente. A versão atual será publicada nesta página juntamente com a data da última atualização.</p>
 
-      <h2>11. Alterações nesta política</h2>
-      <p>
-        Podemos atualizar esta Política de Privacidade periodicamente. A versão
-        atual será publicada nesta página juntamente com a data da última
-        atualização.
-      </p>
+        <h3>12. Contato</h3>
+        <p>Para dúvidas ou solicitações relacionadas à privacidade, entre em contato: <a class="inline" href="mailto:privacy@demavinsky.com.br">privacy@demavinsky.com.br</a></p>
 
-      <h2>12. Contato</h2>
-      <p>
-        Para dúvidas ou solicitações relacionadas à privacidade, entre em contato:
-        <a href="mailto:privacy@demavinsky.com.br">privacy@demavinsky.com.br</a>
-      </p>
-
-      <a class="top-link" href="#top">↑ Voltar para seleção de idioma</a>
+        <a class="back-top" href="#top">↑ Voltar ao topo</a>
+      </div>
     </section>
 
-    <!-- ESPAÑOL -->
-    <section class="policy-section" id="es" lang="es">
-      <h1>Política de Privacidad — Español</h1>
-      <p class="updated">Última actualización: 29 de agosto de 2026</p>
+    <section class="policy" id="es" lang="es">
+      <div class="container">
+        <div class="policy-header">
+          <h2>Política de Privacidad — Español</h2>
+          <p class="updated">Última actualización: 29 de agosto de 2026</p>
+        </div>
 
-      <p>
-        Demavinsky Games respeta tu privacidad. Esta Política de Privacidad
-        explica cómo se puede recopilar, utilizar y procesar información cuando
-        utilizas nuestros sitios web, juegos móviles y servicios relacionados.
-      </p>
+        <p>Demavinsky Games respeta tu privacidad. Esta Política de Privacidad explica cómo se puede recopilar, utilizar y procesar información cuando utilizas nuestros sitios web, juegos móviles y servicios relacionados.</p>
 
-      <h2>1. Información que podemos recopilar</h2>
-      <p>
-        Nuestros juegos pueden recopilar información técnica y de uso limitada,
-        necesaria para operar, mejorar, proteger y monetizar el servicio. Esto
-        puede incluir:
-      </p>
-      <ul>
-        <li>información del dispositivo y del sistema operativo;</li>
-        <li>versión de la aplicación y configuración de idioma;</li>
-        <li>datos de uso de funciones y de juego;</li>
-        <li>informes de fallos e información de diagnóstico;</li>
-        <li>identificadores publicitarios y datos relacionados con la interacción con anuncios, cuando esté permitido.</li>
-      </ul>
+        <h3>1. Información que podemos recopilar</h3>
+        <p>Nuestros juegos pueden recopilar información técnica y de uso limitada, necesaria para operar, mejorar, proteger y monetizar el servicio. Esto puede incluir:</p>
+        <ul>
+          <li>información del dispositivo y del sistema operativo;</li>
+          <li>versión de la aplicación y configuración de idioma;</li>
+          <li>datos de uso de funciones y de juego;</li>
+          <li>informes de fallos e información de diagnóstico;</li>
+          <li>identificadores publicitarios y datos relacionados con la interacción con anuncios, cuando esté permitido.</li>
+        </ul>
 
-      <h2>2. Analítica y diagnóstico</h2>
-      <p>
-        Podemos utilizar servicios de terceros como Firebase Analytics y Firebase
-        Crashlytics para entender cómo se utilizan nuestros juegos, medir el
-        rendimiento, identificar problemas técnicos y mejorar la estabilidad.
-      </p>
+        <h3>2. Analítica y diagnóstico</h3>
+        <p>Podemos utilizar servicios de terceros como Firebase Analytics y Firebase Crashlytics para entender cómo se utilizan nuestros juegos, medir el rendimiento, identificar problemas técnicos y mejorar la estabilidad.</p>
 
-      <h2>3. Publicidad</h2>
-      <p>
-        Algunos productos de Demavinsky Games pueden mostrar anuncios a través de
-        servicios publicitarios de terceros como Google AdMob. Estos servicios
-        pueden procesar información del dispositivo, identificadores publicitarios
-        y datos de interacción con anuncios de acuerdo con sus propias políticas de
-        privacidad y la legislación aplicable.
-      </p>
+        <h3>3. Publicidad</h3>
+        <p>Algunos productos de Demavinsky Games pueden mostrar anuncios a través de servicios publicitarios de terceros como Google AdMob. Estos servicios pueden procesar información del dispositivo, identificadores publicitarios y datos de interacción con anuncios de acuerdo con sus propias políticas de privacidad y la legislación aplicable.</p>
+        <p>Cuando sea necesario, los usuarios podrán recibir opciones de consentimiento o privacidad antes de que se realice publicidad personalizada u otro procesamiento relacionado.</p>
 
-      <p>
-        Cuando sea necesario, los usuarios podrán recibir opciones de consentimiento
-        o privacidad antes de que se realice publicidad personalizada u otro
-        procesamiento relacionado.
-      </p>
+        <h3>4. Datos locales del juego</h3>
+        <p>Parte de la información del juego, como configuraciones, preferencias, progreso o puntuaciones máximas, puede almacenarse localmente en tu dispositivo.</p>
 
-      <h2>4. Datos locales del juego</h2>
-      <p>
-        Parte de la información del juego, como configuraciones, preferencias,
-        progreso o puntuaciones máximas, puede almacenarse localmente en tu
-        dispositivo.
-      </p>
+        <h3>5. Cómo utilizamos la información</h3>
+        <p>La información puede utilizarse para:</p>
+        <ul>
+          <li>operar y mantener nuestros juegos y servicios;</li>
+          <li>mejorar el juego, el rendimiento y la experiencia del usuario;</li>
+          <li>diagnosticar fallos y problemas técnicos;</li>
+          <li>medir el uso y el rendimiento del producto;</li>
+          <li>mostrar y medir publicidad;</li>
+          <li>cumplir con obligaciones legales y regulatorias.</li>
+        </ul>
 
-      <h2>5. Cómo utilizamos la información</h2>
-      <p>La información puede utilizarse para:</p>
-      <ul>
-        <li>operar y mantener nuestros juegos y servicios;</li>
-        <li>mejorar el juego, el rendimiento y la experiencia del usuario;</li>
-        <li>diagnosticar fallos y problemas técnicos;</li>
-        <li>medir el uso y el rendimiento del producto;</li>
-        <li>mostrar y medir publicidad;</li>
-        <li>cumplir con obligaciones legales y regulatorias.</li>
-      </ul>
+        <h3>6. Servicios de terceros</h3>
+        <p>Nuestros productos pueden depender de plataformas y servicios de terceros. El tratamiento de información por parte de estos proveedores se rige por sus respectivas políticas de privacidad. Esto puede incluir Google Play Services, Firebase, Google AdMob y servicios de gestión de consentimiento utilizados para cumplir requisitos de privacidad.</p>
 
-      <h2>6. Servicios de terceros</h2>
-      <p>
-        Nuestros productos pueden depender de plataformas y servicios de terceros.
-        El tratamiento de información por parte de estos proveedores se rige por
-        sus respectivas políticas de privacidad. Esto puede incluir Google Play
-        Services, Firebase, Google AdMob y servicios de gestión de consentimiento
-        utilizados para cumplir requisitos de privacidad.
-      </p>
+        <h3>7. Privacidad de menores</h3>
+        <p>Nuestros servicios no están destinados a recopilar conscientemente información personal de menores en contravención de la legislación aplicable. Si tenemos conocimiento de que se ha recopilado información personal de un menor de una forma que requiera consentimiento parental o eliminación, tomaremos las medidas correspondientes.</p>
 
-      <h2>7. Privacidad de menores</h2>
-      <p>
-        Nuestros servicios no están destinados a recopilar conscientemente
-        información personal de menores en contravención de la legislación
-        aplicable. Si tenemos conocimiento de que se ha recopilado información
-        personal de un menor de una forma que requiera consentimiento parental o
-        eliminación, tomaremos las medidas correspondientes.
-      </p>
+        <h3>8. Conservación de datos</h3>
+        <p>La información procesada por Demavinsky Games o por nuestros proveedores de servicios se conserva únicamente durante el tiempo razonablemente necesario para los fines descritos en esta política o según lo exija la ley.</p>
 
-      <h2>8. Conservación de datos</h2>
-      <p>
-        La información procesada por Demavinsky Games o por nuestros proveedores de
-        servicios se conserva únicamente durante el tiempo razonablemente necesario
-        para los fines descritos en esta política o según lo exija la ley.
-      </p>
+        <h3>9. Seguridad</h3>
+        <p>Adoptamos medidas razonables para proteger la información asociada con nuestros servicios. Sin embargo, ningún método de almacenamiento o transmisión electrónica puede garantizarse como completamente seguro.</p>
 
-      <h2>9. Seguridad</h2>
-      <p>
-        Adoptamos medidas razonables para proteger la información asociada con
-        nuestros servicios. Sin embargo, ningún método de almacenamiento o
-        transmisión electrónica puede garantizarse como completamente seguro.
-      </p>
+        <h3>10. Tus derechos y opciones de privacidad</h3>
+        <p>Dependiendo de tu ubicación, puedes tener derechos relacionados con tus datos personales, incluidos acceso, corrección, eliminación, oposición o retirada del consentimiento. Puedes contactarnos para realizar una solicitud relacionada con la privacidad.</p>
 
-      <h2>10. Tus derechos y opciones de privacidad</h2>
-      <p>
-        Dependiendo de tu ubicación, puedes tener derechos relacionados con tus
-        datos personales, incluidos acceso, corrección, eliminación, oposición o
-        retirada del consentimiento. Puedes contactarnos para realizar una
-        solicitud relacionada con la privacidad.
-      </p>
+        <h3>11. Cambios en esta política</h3>
+        <p>Podemos actualizar esta Política de Privacidad periódicamente. La versión vigente se publicará en esta página junto con la fecha de la última actualización.</p>
 
-      <h2>11. Cambios en esta política</h2>
-      <p>
-        Podemos actualizar esta Política de Privacidad periódicamente. La versión
-        vigente se publicará en esta página junto con la fecha de la última
-        actualización.
-      </p>
+        <h3>12. Contacto</h3>
+        <p>Para preguntas o solicitudes relacionadas con la privacidad, contacta con: <a class="inline" href="mailto:privacy@demavinsky.com.br">privacy@demavinsky.com.br</a></p>
 
-      <h2>12. Contacto</h2>
-      <p>
-        Para preguntas o solicitudes relacionadas con la privacidad, contacta con:
-        <a href="mailto:privacy@demavinsky.com.br">privacy@demavinsky.com.br</a>
-      </p>
-
-      <a class="top-link" href="#top">↑ Volver a la selección de idioma</a>
+        <a class="back-top" href="#top">↑ Volver arriba</a>
+      </div>
     </section>
-
-    <footer>
-      © 2026 Demavinsky Games
-    </footer>
   </main>
+
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-left">
+        <img class="footer-symbol" src="assets/demavinsky-symbol.png" alt="" aria-hidden="true" />
+        <span>© 2026 Demavinsky Games</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="https://www.instagram.com/demavinsky/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://x.com/DemavinskyGames" target="_blank" rel="noopener noreferrer">X</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        eyebrow: "Legal",
+        pageTitle: "Privacy Policy",
+        intro: "Choose your language below to jump directly to the corresponding version of this policy."
+      },
+      pt: {
+        eyebrow: "Legal",
+        pageTitle: "Política de Privacidade",
+        intro: "Escolha seu idioma abaixo para ir diretamente à versão correspondente desta política."
+      },
+      es: {
+        eyebrow: "Legal",
+        pageTitle: "Política de Privacidad",
+        intro: "Elige tu idioma a continuación para ir directamente a la versión correspondiente de esta política."
+      }
+    };
+
+    const anchors = { en: "#en", pt: "#pt", es: "#es" };
+
+    function applyLanguage(lang, navigate = false) {
+      const selected = translations[lang] ? lang : "en";
+      document.documentElement.lang = selected === "pt" ? "pt-BR" : selected;
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+        if (translations[selected][key]) element.textContent = translations[selected][key];
+      });
+
+      document.querySelectorAll(".language-button").forEach((button) => {
+        button.classList.toggle("active", button.dataset.lang === selected);
+      });
+
+      localStorage.setItem("demavinsky-language", selected);
+
+      if (navigate) {
+        document.querySelector(anchors[selected]).scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    document.querySelectorAll(".language-button").forEach((button) => {
+      button.addEventListener("click", () => applyLanguage(button.dataset.lang, true));
+    });
+
+    const hashLang = location.hash.replace("#", "");
+    const saved = localStorage.getItem("demavinsky-language");
+    const browser = (navigator.language || "en").toLowerCase();
+
+    let initial = "en";
+    if (["en","pt","es"].includes(hashLang)) initial = hashLang;
+    else if (saved && translations[saved]) initial = saved;
+    else if (browser.startsWith("pt")) initial = "pt";
+    else if (browser.startsWith("es")) initial = "es";
+
+    applyLanguage(initial);
+  </script>
 </body>
 </html>
