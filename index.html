@@ -115,14 +115,12 @@
     .hero::after {
       content: "";
       position: absolute;
-      right: -12%;
+      right: 2.5%;
       top: 50%;
-      width: 44vw;
-      height: 44vw;
-      max-width: 660px;
-      max-height: 660px;
-      transform: translateY(-46%);
-      background: url("assets/demavinsky-symbol.png") center/contain no-repeat;
+      width: min(24vw, 300px);
+      height: min(40vw, 500px);
+      transform: translateY(-50%);
+      background: url("assets/demavinsky-symbol.png") center / contain no-repeat;
       opacity: .055;
       pointer-events: none;
       z-index: 0;
@@ -404,10 +402,11 @@
       }
 
       .hero::after {
-        right: -28%;
-        width: 72vw;
-        height: 72vw;
-        opacity: .04;
+        right: 4%;
+        top: 52%;
+        width: min(26vw, 180px);
+        height: min(46vw, 320px);
+        opacity: .035;
       }
     }
 
