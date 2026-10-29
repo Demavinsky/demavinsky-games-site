@@ -349,6 +349,42 @@
       color: var(--text);
     }
     #available .store-button svg { width: 18px; height: 18px; }
+  
+    /* Navegação mobile — somente header */
+    .mobile-menu { display: none; position: relative; flex: none; }
+    .mobile-menu > summary {
+      list-style: none; width: 42px; height: 40px; display: flex;
+      align-items: center; justify-content: center; cursor: pointer;
+      border: 1px solid #3c3c3c; border-radius: 8px;
+      color: #f5f5f5; background: #1a1a1a; font-size: 23px;
+    }
+    .mobile-menu > summary::-webkit-details-marker { display: none; }
+    .mobile-menu[open] > summary { border-color: #bfc3c8; }
+    .mobile-menu > summary:focus-visible { outline: 2px solid #bfc3c8; outline-offset: 2px; }
+    .mobile-menu > nav {
+      position: absolute; right: 0; top: calc(100% + 12px);
+      width: min(260px, calc(100vw - 24px)); padding: 9px;
+      display: flex; flex-direction: column; gap: 2px;
+      border: 1px solid #3c3c3c; border-radius: 12px;
+      background: #151515; box-shadow: 0 18px 42px rgba(0,0,0,.6);
+      z-index: 100; text-align: left;
+    }
+    .mobile-menu > nav a {
+      display: block; padding: 12px 13px; border-radius: 7px;
+      color: #f5f5f5; text-decoration: none; font-size: 14px;
+    }
+    .mobile-menu > nav a:hover, .mobile-menu > nav a:focus-visible { background: #292929; }
+    @media (max-width: 920px) {
+      .mobile-menu { display: block; }
+      .topbar .nav-links, .topbar .nav, .topbar .top-links { display: none; }
+      .topbar .top-actions { flex-direction: row; align-items: center; gap: 10px; }
+      .topbar .topbar-inner { align-items: center; }
+    }
+    @media (max-width: 420px) {
+      .topbar .top-actions { gap: 8px; }
+      .topbar .language-bar, .topbar .header-languages { gap: 4px; }
+      .topbar .language-button, .topbar .header-languages a { padding: 7px 8px; }
+    }
   </style>
 </head>
 <body>
@@ -372,6 +408,16 @@
           <button class="language-button" data-lang="en" type="button">EN</button>
           <button class="language-button" data-lang="es" type="button">ES</button>
         </div>
+        <details class="mobile-menu">
+          <summary aria-label="Abrir menu de navegação" title="Menu">☰</summary>
+          <nav aria-label="Navegação mobile">
+            <a href="../index.html" data-i18n="navHome">Início</a>
+            <a href="../games/index.html" data-i18n="navGames">Jogos</a>
+            <a href="../join/index.html" data-i18n="navJoin">Faça parte</a>
+            <a href="../index.html#about" data-i18n="navAbout">Sobre</a>
+            <a href="../index.html#contact" data-i18n="navContact">Contato</a>
+          </nav>
+        </details>
       </div>
     </div>
   </nav>
