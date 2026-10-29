@@ -314,6 +314,41 @@
       section { padding: 72px 0; }
       .footer-content { flex-direction: column; align-items: flex-start; }
     }
+
+    /* Destaques exclusivos do Classic Grid Blocks */
+    .classic-grid-card {
+      cursor: pointer;
+      background: linear-gradient(145deg, rgba(77,163,255,.16), rgba(22,44,70,.18) 55%, rgba(52,168,83,.045)), var(--surface);
+      border-color: rgba(77,163,255,.52);
+      box-shadow: inset 0 1px 0 rgba(121,198,255,.11), 0 10px 36px rgba(0,0,0,.18);
+    }
+    .classic-grid-card:hover {
+      border-color: rgba(121,198,255,.86);
+      background: linear-gradient(145deg, rgba(77,163,255,.23), rgba(22,44,70,.23) 55%, rgba(52,168,83,.06)), var(--surface);
+      box-shadow: inset 0 1px 0 rgba(121,198,255,.16), 0 16px 42px rgba(0,0,0,.3);
+    }
+    .classic-grid-card .card-page-link { position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+    .classic-grid-card .card-page-link:focus-visible { outline: 2px solid #79c6ff; outline-offset: -3px; }
+    .classic-grid-card .card-actions { position: relative; z-index: 2; }
+    .classic-grid-card .status { color: #9ad0ff; border-color: rgba(77,163,255,.5); background: rgba(77,163,255,.12); }
+    /* Botões Google Play: mesmo estilo da página inicial. */
+    #available .store-button {
+      margin-top: 0;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 9px;
+      font-size: .93rem;
+      background: linear-gradient(180deg, rgba(66, 133, 244, 0.14), rgba(52, 168, 83, 0.10));
+      border: 1px solid rgba(66, 133, 244, 0.34);
+      color: var(--text);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    #available .store-button:hover {
+      background: linear-gradient(180deg, rgba(66, 133, 244, 0.22), rgba(52, 168, 83, 0.16));
+      border-color: rgba(66, 133, 244, 0.55);
+      color: var(--text);
+    }
+    #available .store-button svg { width: 18px; height: 18px; }
   </style>
 </head>
 <body>
@@ -381,7 +416,8 @@
         </div>
 
         <div class="games-grid">
-          <article class="game-card">
+          <article class="game-card classic-grid-card">
+            <a class="card-page-link" href="https://demavinsky.com.br/games/classic-grid-blocks/" aria-label="Classic Grid Blocks — página do jogo"></a>
             <div class="game-topline">
               <h3>Classic Grid Blocks</h3>
               <span class="status" data-i18n="availableNow">Available now</span>
@@ -394,7 +430,12 @@
             </div>
             <div class="card-actions">
               <a class="button store-button" href="https://play.google.com/store/apps/details?id=com.demavinsky.classicgridblocks" target="_blank" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.84 3.18c-.26.27-.42.67-.42 1.17v15.3c0 .5.16.9.42 1.17l.07.06 8.56-8.56v-.64L3.91 3.12l-.07.06Zm12.49 12 3.45-1.96c.97-.55.97-1.45 0-2l-3.45-1.96-2.86 2.86v.2l2.86 2.86ZM4.84 20.82c.4.35.99.39 1.66.01l9.89-5.72-2.92-2.92-8.63 8.63Zm11.55-11.93L6.5 3.17c-.67-.38-1.26-.34-1.66.01l8.63 8.63 2.92-2.92Z"/></svg>
+                <svg class="store-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="#34A853" d="M3.84 3.18c-.26.27-.42.67-.42 1.17v15.3c0 .5.16.9.42 1.17l.07.06 8.56-8.56v-.64L3.91 3.12l-.07.06Z"/>
+                <path fill="#4285F4" d="M16.33 15.18l-2.86-2.86v-.64l2.86-2.86.06.03 3.39 1.93c.97.55.97 1.45 0 2l-3.39 1.93-.06.07Z"/>
+                <path fill="#FBBC04" d="M16.39 15.11l-2.92-2.92-8.63 8.63c.4.35.99.39 1.66.01l9.89-5.72"/>
+                <path fill="#EA4335" d="M16.39 8.89 6.5 3.17c-.67-.38-1.26-.34-1.66.01l8.63 8.63 2.92-2.92Z"/>
+              </svg>
                 <span data-i18n="playStore">View on Google Play</span>
               </a>
             </div>
@@ -413,7 +454,12 @@
             </div>
             <div class="card-actions">
               <a class="button store-button" href="https://play.google.com/store/apps/details?id=com.demavinsky.binarylogic" target="_blank" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.84 3.18c-.26.27-.42.67-.42 1.17v15.3c0 .5.16.9.42 1.17l.07.06 8.56-8.56v-.64L3.91 3.12l-.07.06Zm12.49 12 3.45-1.96c.97-.55.97-1.45 0-2l-3.45-1.96-2.86 2.86v.2l2.86 2.86ZM4.84 20.82c.4.35.99.39 1.66.01l9.89-5.72-2.92-2.92-8.63 8.63Zm11.55-11.93L6.5 3.17c-.67-.38-1.26-.34-1.66.01l8.63 8.63 2.92-2.92Z"/></svg>
+                <svg class="store-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="#34A853" d="M3.84 3.18c-.26.27-.42.67-.42 1.17v15.3c0 .5.16.9.42 1.17l.07.06 8.56-8.56v-.64L3.91 3.12l-.07.06Z"/>
+                <path fill="#4285F4" d="M16.33 15.18l-2.86-2.86v-.64l2.86-2.86.06.03 3.39 1.93c.97.55.97 1.45 0 2l-3.39 1.93-.06.07Z"/>
+                <path fill="#FBBC04" d="M16.39 15.11l-2.92-2.92-8.63 8.63c.4.35.99.39 1.66.01l9.89-5.72"/>
+                <path fill="#EA4335" d="M16.39 8.89 6.5 3.17c-.67-.38-1.26-.34-1.66.01l8.63 8.63 2.92-2.92Z"/>
+              </svg>
                 <span data-i18n="playStore">View on Google Play</span>
               </a>
             </div>
