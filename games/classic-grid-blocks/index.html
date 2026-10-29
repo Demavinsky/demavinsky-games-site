@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classic Grid Blocks — Block Puzzle 10×10 para Android | Demavinsky Games</title>
+  <meta name="description" content="Classic Grid Blocks é um block puzzle 10×10 gratuito para Android: encaixe peças, limpe linhas e colunas, faça combos e supere seu recorde." />
+  <meta name="theme-color" content="#111827" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://demavinsky.com.br/games/classic-grid-blocks/" />
+  <link rel="icon" href="assets/app-icon.png" />
+  <link rel="apple-touch-icon" href="assets/app-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Demavinsky Games" />
+  <meta property="og:title" content="Classic Grid Blocks — Block Puzzle 10×10 para Android" />
+  <meta property="og:description" content="Encaixe peças, limpe linhas, faça combos e supere seu recorde em Classic Grid Blocks." />
+  <meta property="og:url" content="https://demavinsky.com.br/games/classic-grid-blocks/" />
+  <meta property="og:image" content="https://demavinsky.com.br/games/classic-grid-blocks/assets/feature-graphic.png" />
+  <meta property="og:image:width" content="1024" />
+  <meta property="og:image:height" content="500" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Classic Grid Blocks — Block Puzzle 10×10 para Android" />
+  <meta name="twitter:description" content="Encaixe peças, limpe linhas, faça combos e supere seu recorde." />
+  <meta name="twitter:image" content="https://demavinsky.com.br/games/classic-grid-blocks/assets/feature-graphic.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["SoftwareApplication", "VideoGame"],
+    "name": "Classic Grid Blocks",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Android",
+    "description": "Block puzzle 10×10 com encaixe de peças, limpeza de linhas e colunas, combos e desafio de recorde.",
+    "url": "https://demavinsky.com.br/games/classic-grid-blocks/",
+    "image": "https://demavinsky.com.br/games/classic-grid-blocks/assets/app-icon.png",
+    "downloadUrl": "https://play.google.com/store/apps/details?id=com.demavinsky.classicgridblocks",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Demavinsky Games",
+      "url": "https://demavinsky.com.br/"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BRL"
+    }
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#090909;
+      --surface:#111827;
+      --surface-2:#1b2537;
+      --grid:#202c40;
+      --border:#2a3951;
+      --border-strong:#3b506f;
+      --text:#f8fafc;
+      --muted:#aab6c8;
+      --soft:#7f8ca0;
+      --blue:#4da3ff;
+      --blue-2:#79c6ff;
+      --max:1180px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 80% 8%,rgba(77,163,255,.08),transparent 24%),
+        radial-gradient(circle at 12% 42%,rgba(121,198,255,.035),transparent 28%),
+        var(--bg);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    .container{width:min(var(--max),90%);margin:0 auto}
+
+    .topbar{position:sticky;top:0;z-index:50;background:rgba(9,9,9,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)}
+    .topbar-inner{min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .brand img{width:38px;height:38px;object-fit:contain}
+    .nav-wrap{display:flex;align-items:center;gap:20px}
+    .nav{display:flex;align-items:center;gap:18px;color:var(--muted);font-size:.9rem}
+    .nav a:hover{color:var(--text)}
+    .language-bar{display:flex;gap:7px}
+    .language-button{color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:7px;padding:7px 10px;cursor:pointer;font-size:.78rem;letter-spacing:.04em}
+    .language-button.active,.language-button:hover{color:var(--bg);background:var(--text);border-color:var(--text)}
+
+    .breadcrumb{padding:24px 0 0;color:var(--soft);font-size:.82rem}
+    .breadcrumb a:hover{color:var(--text)}
+
+    .hero{padding:48px 0 76px;border-bottom:1px solid var(--border)}
+    .hero-grid{display:grid;grid-template-columns:1fr .92fr;gap:56px;align-items:center}
+    .product-logo{width:min(520px,90%);margin-bottom:22px;filter:drop-shadow(0 16px 44px rgba(0,0,0,.36))}
+    .kicker{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-2);margin-bottom:15px}
+    .hero h1{font-size:clamp(2.3rem,4.8vw,4.7rem);line-height:.98;letter-spacing:-.055em;max-width:720px}
+    .hero-sub{margin-top:22px;color:var(--muted);font-size:clamp(1.03rem,1.6vw,1.24rem);max-width:720px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:47px;padding:0 18px;border:1px solid var(--border-strong);border-radius:10px;font-weight:700;transition:.18s ease}
+    .button:hover{transform:translateY(-1px);border-color:var(--blue-2)}
+    .button.primary{background:linear-gradient(180deg,#58acff,#378de9);border-color:#67b7ff;color:#07111f;box-shadow:0 12px 32px rgba(77,163,255,.2)}
+    .button.secondary{color:var(--muted);background:rgba(255,255,255,.02)}
+    .hero-visual{border:1px solid var(--border);border-radius:28px;padding:18px;background:linear-gradient(160deg,rgba(77,163,255,.10),rgba(255,255,255,.02) 45%,rgba(121,198,255,.04)),var(--surface);box-shadow:0 30px 80px rgba(0,0,0,.34)}
+    .hero-visual img{border-radius:20px;width:100%;height:auto;object-fit:cover}
+
+    section{padding:86px 0;border-bottom:1px solid var(--border)}
+    .section-head{display:grid;grid-template-columns:.72fr 1.28fr;gap:56px;align-items:start;margin-bottom:36px}
+    .section-kicker{color:var(--soft);text-transform:uppercase;letter-spacing:.12em;font-size:.74rem;margin-bottom:8px}
+    h2{font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.045em;line-height:1.05}
+    .lead{color:var(--muted);font-size:1.04rem;max-width:760px}
+
+    .facts{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    .fact{border:1px solid var(--border);border-radius:14px;padding:20px;background:rgba(27,37,55,.78)}
+    .fact span{display:block;color:var(--soft);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+    .fact strong{font-size:1rem}
+
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .feature{border:1px solid var(--border);border-radius:16px;padding:26px;background:linear-gradient(180deg,rgba(255,255,255,.025),transparent),var(--surface-2)}
+    .feature .tag{display:inline-block;margin-bottom:14px;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--blue-2)}
+    .feature h3{font-size:1.25rem;margin-bottom:10px}
+    .feature p{color:var(--muted)}
+
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .gallery figure{border:1px solid var(--border);border-radius:18px;overflow:hidden;background:var(--surface);box-shadow:0 22px 50px rgba(0,0,0,.24)}
+    .gallery img{width:100%;aspect-ratio:919/2048;object-fit:cover}
+    .gallery figcaption{padding:12px 14px;color:var(--muted);font-size:.82rem;border-top:1px solid var(--border)}
+
+    .wide-graphic{margin-top:20px;border:1px solid var(--border);border-radius:18px;overflow:hidden;background:var(--surface)}
+    .wide-graphic img{width:100%;height:auto}
+
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .panel{border:1px solid var(--border);border-radius:16px;padding:28px;background:var(--surface-2)}
+    .panel h3{font-size:1.35rem;margin-bottom:10px}
+    .panel p{color:var(--muted)}
+
+    .faq{display:grid;gap:10px}
+    details{border:1px solid var(--border);border-radius:12px;background:var(--surface-2);padding:18px 20px}
+    summary{cursor:pointer;font-weight:700}
+    details p{color:var(--muted);margin-top:10px}
+
+    .cta{text-align:center;padding:96px 0}
+    .cta h2{max-width:760px;margin:0 auto}
+    .cta p{max-width:640px;margin:18px auto 28px;color:var(--muted)}
+
+    .other-games{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .game-card{border:1px solid var(--border);border-radius:16px;padding:24px;background:var(--surface-2)}
+    .game-card small{color:var(--soft);text-transform:uppercase;letter-spacing:.1em}
+    .game-card h3{font-size:1.4rem;margin:8px 0}
+    .game-card p{color:var(--muted);margin-bottom:14px}
+    .game-card a{color:var(--blue-2);font-weight:700}
+
+    footer{padding:36px 0 46px;color:var(--soft);font-size:.88rem;background:#090909}
+    .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .footer-links{display:flex;gap:16px;flex-wrap:wrap}
+    .footer-links a:hover{color:var(--text)}
+
+    @media (max-width:980px){
+      .hero-grid,.section-head,.split{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .facts{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:650px){
+      .nav{display:none}
+      .gallery,.feature-grid,.other-games,.facts{grid-template-columns:1fr}
+      .hero{padding-top:38px}
+      .product-logo{width:min(460px,100%)}
+    }
+  
+    /* STANDARD HEADER */
+    body { padding-top: 66px; }
+
+    .topbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      background: rgba(9,9,9,.82);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      backdrop-filter: blur(18px);
+    }
+    .topbar-inner {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+    .brand-logo { width: 38px; height: 38px; object-fit: contain; }
+    .top-actions { display: flex; align-items: center; gap: 18px; }
+    .nav-links { display: flex; align-items: center; gap: 16px; color: var(--muted); font-size: .86rem; }
+    .nav-links a { color: inherit; transition: .18s ease; }
+    .nav-links a:hover { color: var(--text); }
+    .language-bar { display: flex; gap: 7px; }
+    .language-button {
+      color: var(--muted); background: transparent; border: 1px solid var(--border);
+      border-radius: 7px; padding: 7px 10px; cursor: pointer; font-size: .78rem;
+      letter-spacing: .04em; transition: .18s ease;
+    }
+    .language-button:hover, .language-button.active {
+      color: var(--bg); background: var(--text); border-color: var(--text);
+    }
+    @media (max-width: 800px) { .nav-links { display: none; } }
+    @media (max-width: 560px) { .brand span:last-child { display:none; } .brand-logo { width:34px; height:34px; } }
+
+  </style>
+</head>
+<body>
+  <nav class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="../../index.html" aria-label="Demavinsky Games home">
+        <img class="brand-logo" src="../../assets/demavinsky-logo.png" alt="Demavinsky Games logo" />
+        <span>Demavinsky Games</span>
+      </a>
+      <div class="top-actions">
+        <div class="nav-links" aria-label="Primary navigation">
+          <a href="../../index.html" data-i18n="navHome">Início</a>
+          <a href="../index.html" data-i18n="navGames">Jogos</a>
+          <a href="../../join/index.html" data-i18n="navJoin">Faça parte</a>
+          <a href="../../index.html#about" data-i18n="navAbout">Sobre</a>
+          <a href="../../index.html#contact" data-i18n="navContact">Contato</a>
+        </div>
+        <div class="language-bar" aria-label="Language selector">
+          <button class="language-button" data-lang="pt" type="button">PT</button>
+          <button class="language-button" data-lang="en" type="button">EN</button>
+          <button class="language-button" data-lang="es" type="button">ES</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container breadcrumb"><a href="../../index.html" data-i18n="crumbHome">Início</a> / <a href="../index.html" data-i18n="crumbGames">Jogos</a> / Classic Grid Blocks</div>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <img class="product-logo" src="assets/wordmark.png" alt="Classic Grid Blocks" />
+        <div class="kicker" data-i18n="heroKicker">Block Puzzle • Android • Disponível</div>
+        <h1 data-i18n="heroTitle">Encaixe. Limpe. Faça combos. Supere seu recorde.</h1>
+        <p class="hero-sub" data-i18n="heroSub">Classic Grid Blocks é um block puzzle 10×10 gratuito, feito para partidas rápidas, decisões simples e aquela vontade de jogar mais uma vez.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="https://play.google.com/store/apps/details?id=com.demavinsky.classicgridblocks" target="_blank" rel="noopener noreferrer" data-i18n="playNow">Jogar no Google Play</a>
+          <a class="button secondary" href="#como-funciona" data-i18n="howItWorksBtn">Como funciona</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="assets/screenshot-gameplay-97.jpg" alt="Gameplay do Classic Grid Blocks com tabuleiro 10×10, score e trio de peças disponível" data-alt-key="altGameplayHero" />
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <div class="facts">
+          <div class="fact"><span data-i18n="factGenreLabel">Gênero</span><strong>Block Puzzle</strong></div>
+          <div class="fact"><span data-i18n="factPlatformLabel">Plataforma</span><strong>Android</strong></div>
+          <div class="fact"><span data-i18n="factBoardLabel">Tabuleiro</span><strong>10×10</strong></div>
+          <div class="fact"><span data-i18n="factLangLabel">Idiomas</span><strong>PT • EN • ES</strong></div>
+          <div class="fact"><span data-i18n="factPriceLabel">Preço</span><strong data-i18n="factPriceValue">Grátis</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona">
+      <div class="container">
+        <div class="section-head">
+          <div><p class="section-kicker" data-i18n="howKicker">Como jogar</p><h2 data-i18n="howTitle">Simples de entender. Estratégico na medida certa.</h2></div>
+          <p class="lead" data-i18n="howLead">A cada ciclo, você recebe três peças. Arraste para o tabuleiro, complete linhas ou colunas e mantenha espaço para continuar jogando. Quanto melhor a sequência, maior a pontuação.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature"><span class="tag">01</span><h3 data-i18n="f1Title">Escolha a peça</h3><p data-i18n="f1Text">Analise o trio disponível e decida qual encaixe preserva mais possibilidades para as próximas jogadas.</p></article>
+          <article class="feature"><span class="tag">02</span><h3 data-i18n="f2Title">Complete linhas e colunas</h3><p data-i18n="f2Text">Preencha uma linha ou coluna inteira para limpá-la e liberar espaço no tabuleiro.</p></article>
+          <article class="feature"><span class="tag">03</span><h3 data-i18n="f3Title">Construa combos</h3><p data-i18n="f3Text">Limpezas em sequência rendem mais pontos e transformam cada partida em uma busca pelo seu melhor resultado.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div><p class="section-kicker" data-i18n="galleryKicker">Galeria</p><h2 data-i18n="galleryTitle">O jogo como ele realmente é.</h2></div>
+          <p class="lead" data-i18n="galleryLead">Interface limpa, blocos coloridos e foco total no tabuleiro. Sem cadastro obrigatório: abrir, jogar e tentar superar o próprio recorde.</p>
+        </div>
+        <div class="gallery">
+          <figure><img src="assets/screenshot-home.jpg" alt="Tela inicial do Classic Grid Blocks com melhor pontuação e botões Jogar e Configurações" data-alt-key="altHome" /><figcaption data-i18n="capHome">Tela inicial e melhor pontuação.</figcaption></figure>
+          <figure><img src="assets/screenshot-gameplay-97.jpg" alt="Partida do Classic Grid Blocks com score 97, tabuleiro colorido e três peças disponíveis" data-alt-key="altGameplay97" /><figcaption data-i18n="capGameplay1">Gameplay com trio de peças disponível.</figcaption></figure>
+          <figure><img src="assets/screenshot-gameplay-68.jpg" alt="Partida do Classic Grid Blocks com diferentes blocos coloridos distribuídos no tabuleiro 10×10" data-alt-key="altGameplay68" /><figcaption data-i18n="capGameplay2">Cada partida cria novas decisões.</figcaption></figure>
+          <figure><img src="assets/screenshot-gameover.jpg" alt="Tela de fim de jogo do Classic Grid Blocks com opção de continuar assistindo a um anúncio recompensado" data-alt-key="altGameOver" /><figcaption data-i18n="capGameOver">Game over com Continue opcional.</figcaption></figure>
+        </div>
+        <div class="wide-graphic"><img src="assets/feature-graphic.png" alt="Arte oficial do Classic Grid Blocks mostrando o logo, blocos coloridos e um tabuleiro de block puzzle" data-alt-key="altFeatureGraphic" /></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div><p class="section-kicker" data-i18n="featuresKicker">Recursos</p><h2 data-i18n="featuresTitle">Partidas rápidas com escolhas que importam.</h2></div>
+          <p class="lead" data-i18n="featuresLead">Classic Grid Blocks mantém o núcleo simples e adiciona recursos opcionais para dar mais controle quando a partida aperta.</p>
+        </div>
+        <div class="split">
+          <div class="panel"><h3 data-i18n="continueTitle">Continue</h3><p data-i18n="continueText">Após o game over, você pode assistir a um anúncio recompensado e continuar a partida uma vez.</p></div>
+          <div class="panel"><h3 data-i18n="swapTitle">Swap</h3><p data-i18n="swapText">Quando disponível, o Swap permite trocar o trio de peças assistindo a um anúncio recompensado.</p></div>
+          <div class="panel"><h3 data-i18n="scoreTitle">Score e recorde</h3><p data-i18n="scoreText">Acompanhe sua pontuação atual e tente superar a melhor marca a cada nova partida.</p></div>
+          <div class="panel"><h3 data-i18n="offlineTitle">Jogue sem conta</h3><p data-i18n="offlineText">Não é necessário criar login. O gameplay funciona offline; recursos de anúncio dependem de conexão.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div><p class="section-kicker">FAQ</p><h2 data-i18n="faqTitle">Perguntas rápidas.</h2></div>
+          <p class="lead" data-i18n="faqLead">Tudo o que você precisa saber antes de instalar.</p>
+        </div>
+        <div class="faq">
+          <details><summary data-i18n="q1">Classic Grid Blocks é gratuito?</summary><p data-i18n="a1">Sim. O jogo é gratuito para Android e é monetizado por anúncios.</p></details>
+          <details><summary data-i18n="q2">Precisa criar uma conta?</summary><p data-i18n="a2">Não. O jogo não exige login nem criação de conta.</p></details>
+          <details><summary data-i18n="q3">O jogo funciona offline?</summary><p data-i18n="a3">Sim. O gameplay funciona offline. Recursos que dependem de anúncios exigem conexão com a internet.</p></details>
+          <details><summary data-i18n="q4">Como funcionam os anúncios?</summary><p data-i18n="a4">Há anúncios recompensados opcionais ligados a recursos como Continue e Swap, além de interstitials entre partidas. Anúncios não interrompem uma jogada em andamento.</p></details>
+          <details><summary data-i18n="q5">Classic Grid Blocks está disponível para iPhone?</summary><p data-i18n="a5">Atualmente, o jogo está disponível apenas para Android pela Google Play.</p></details>
+          <details><summary data-i18n="q6">Quais idiomas estão disponíveis?</summary><p data-i18n="a6">Português do Brasil, inglês e espanhol.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div><p class="section-kicker" data-i18n="otherKicker">Outros jogos</p><h2 data-i18n="otherTitle">Conheça mais da Demavinsky Games.</h2></div>
+          <p class="lead" data-i18n="otherLead">Explore outros projetos independentes do estúdio.</p>
+        </div>
+        <div class="other-games">
+          <article class="game-card"><small data-i18n="available">Disponível</small><h3>Dual Grid</h3><p data-i18n="dualText">Puzzle de lógica binária baseado em dedução, estatísticas e desafios diários.</p><a href="../dual-grid/index.html" data-i18n="dualLink">Conhecer Dual Grid →</a></article>
+          <article class="game-card"><small data-i18n="catalogLabel">Catálogo</small><h3 data-i18n="catalogTitle">Mais jogos indie</h3><p data-i18n="catalogText">Veja os títulos disponíveis e os próximos projetos da Demavinsky Games.</p><a href="../index.html" data-i18n="catalogLink">Ver catálogo →</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <h2 data-i18n="ctaTitle">Pronto para tentar superar seu próprio recorde?</h2>
+        <p data-i18n="ctaText">Baixe Classic Grid Blocks gratuitamente para Android e comece uma nova partida.</p>
+        <a class="button primary" href="https://play.google.com/store/apps/details?id=com.demavinsky.classicgridblocks" target="_blank" rel="noopener noreferrer" data-i18n="ctaButton">Baixar no Google Play</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 Demavinsky Games</span>
+      <div class="footer-links">
+        <a href="../index.html" data-i18n="footerGames">Jogos</a>
+        <a href="../../join/index.html" data-i18n="footerJoin">Faça parte</a>
+        <a href="../../privacy.html#pt" id="privacy-link" data-i18n="footerPrivacy">Política de Privacidade</a>
+        <a href="mailto:contato@demavinsky.com.br" data-i18n="footerContact">Contato</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      pt: {
+        seoTitle:"Classic Grid Blocks — Block Puzzle 10×10 para Android | Demavinsky Games",
+        seoDescription:"Classic Grid Blocks é um block puzzle 10×10 gratuito para Android: encaixe peças, limpe linhas e colunas, faça combos e supere seu recorde.",
+        navHome:"Início",navGames:"Jogos",navJoin:"Faça parte",navAbout:"Sobre",navContact:"Contato",crumbHome:"Início",crumbGames:"Jogos",
+        heroKicker:"Block Puzzle • Android • Disponível",heroTitle:"Encaixe. Limpe. Faça combos. Supere seu recorde.",heroSub:"Classic Grid Blocks é um block puzzle 10×10 gratuito, feito para partidas rápidas, decisões simples e aquela vontade de jogar mais uma vez.",playNow:"Jogar no Google Play",howItWorksBtn:"Como funciona",
+        factGenreLabel:"Gênero",factPlatformLabel:"Plataforma",factBoardLabel:"Tabuleiro",factLangLabel:"Idiomas",factPriceLabel:"Preço",factPriceValue:"Grátis",
+        howKicker:"Como jogar",howTitle:"Simples de entender. Estratégico na medida certa.",howLead:"A cada ciclo, você recebe três peças. Arraste para o tabuleiro, complete linhas ou colunas e mantenha espaço para continuar jogando. Quanto melhor a sequência, maior a pontuação.",
+        f1Title:"Escolha a peça",f1Text:"Analise o trio disponível e decida qual encaixe preserva mais possibilidades para as próximas jogadas.",f2Title:"Complete linhas e colunas",f2Text:"Preencha uma linha ou coluna inteira para limpá-la e liberar espaço no tabuleiro.",f3Title:"Construa combos",f3Text:"Limpezas em sequência rendem mais pontos e transformam cada partida em uma busca pelo seu melhor resultado.",
+        galleryKicker:"Galeria",galleryTitle:"O jogo como ele realmente é.",galleryLead:"Interface limpa, blocos coloridos e foco total no tabuleiro. Sem cadastro obrigatório: abrir, jogar e tentar superar o próprio recorde.",capHome:"Tela inicial e melhor pontuação.",capGameplay1:"Gameplay com trio de peças disponível.",capGameplay2:"Cada partida cria novas decisões.",capGameOver:"Game over com Continue opcional.",
+        featuresKicker:"Recursos",featuresTitle:"Partidas rápidas com escolhas que importam.",featuresLead:"Classic Grid Blocks mantém o núcleo simples e adiciona recursos opcionais para dar mais controle quando a partida aperta.",continueTitle:"Continue",continueText:"Após o game over, você pode assistir a um anúncio recompensado e continuar a partida uma vez.",swapTitle:"Swap",swapText:"Quando disponível, o Swap permite trocar o trio de peças assistindo a um anúncio recompensado.",scoreTitle:"Score e recorde",scoreText:"Acompanhe sua pontuação atual e tente superar a melhor marca a cada nova partida.",offlineTitle:"Jogue sem conta",offlineText:"Não é necessário criar login. O gameplay funciona offline; recursos de anúncio dependem de conexão.",
+        faqTitle:"Perguntas rápidas.",faqLead:"Tudo o que você precisa saber antes de instalar.",q1:"Classic Grid Blocks é gratuito?",a1:"Sim. O jogo é gratuito para Android e é monetizado por anúncios.",q2:"Precisa criar uma conta?",a2:"Não. O jogo não exige login nem criação de conta.",q3:"O jogo funciona offline?",a3:"Sim. O gameplay funciona offline. Recursos que dependem de anúncios exigem conexão com a internet.",q4:"Como funcionam os anúncios?",a4:"Há anúncios recompensados opcionais ligados a recursos como Continue e Swap, além de interstitials entre partidas. Anúncios não interrompem uma jogada em andamento.",q5:"Classic Grid Blocks está disponível para iPhone?",a5:"Atualmente, o jogo está disponível apenas para Android pela Google Play.",q6:"Quais idiomas estão disponíveis?",a6:"Português do Brasil, inglês e espanhol.",
+        otherKicker:"Outros jogos",otherTitle:"Conheça mais da Demavinsky Games.",otherLead:"Explore outros projetos independentes do estúdio.",available:"Disponível",dualText:"Puzzle de lógica binária baseado em dedução, estatísticas e desafios diários.",dualLink:"Conhecer Dual Grid →",catalogLabel:"Catálogo",catalogTitle:"Mais jogos indie",catalogText:"Veja os títulos disponíveis e os próximos projetos da Demavinsky Games.",catalogLink:"Ver catálogo →",
+        ctaTitle:"Pronto para tentar superar seu próprio recorde?",ctaText:"Baixe Classic Grid Blocks gratuitamente para Android e comece uma nova partida.",ctaButton:"Baixar no Google Play",footerGames:"Jogos",footerJoin:"Faça parte",footerPrivacy:"Política de Privacidade",footerContact:"Contato",
+        altGameplayHero:"Gameplay do Classic Grid Blocks com tabuleiro 10×10, score e trio de peças disponível",altHome:"Tela inicial do Classic Grid Blocks com melhor pontuação e botões Jogar e Configurações",altGameplay97:"Partida do Classic Grid Blocks com score 97, tabuleiro colorido e três peças disponíveis",altGameplay68:"Partida do Classic Grid Blocks com diferentes blocos coloridos distribuídos no tabuleiro 10×10",altGameOver:"Tela de fim de jogo do Classic Grid Blocks com opção de continuar assistindo a um anúncio recompensado",altFeatureGraphic:"Arte oficial do Classic Grid Blocks mostrando o logo, blocos coloridos e um tabuleiro de block puzzle"
+      },
+      en: {
+        seoTitle:"Classic Grid Blocks — 10×10 Block Puzzle for Android | Demavinsky Games",seoDescription:"Classic Grid Blocks is a free 10×10 block puzzle for Android: place pieces, clear rows and columns, build combos and beat your best score.",
+        navHome:"Home",navGames:"Games",navJoin:"Join us",navAbout:"About",navContact:"Contact",crumbHome:"Home",crumbGames:"Games",heroKicker:"Block Puzzle • Android • Available",heroTitle:"Place. Clear. Build combos. Beat your best score.",heroSub:"Classic Grid Blocks is a free 10×10 block puzzle built for quick sessions, simple decisions and that one-more-game feeling.",playNow:"Play on Google Play",howItWorksBtn:"How it works",factGenreLabel:"Genre",factPlatformLabel:"Platform",factBoardLabel:"Board",factLangLabel:"Languages",factPriceLabel:"Price",factPriceValue:"Free",
+        howKicker:"How to play",howTitle:"Easy to understand. Just strategic enough.",howLead:"Each cycle gives you three pieces. Drag them onto the board, complete rows or columns and keep enough space to stay in the game. Better sequences mean higher scores.",f1Title:"Choose a piece",f1Text:"Read the available trio and pick the placement that keeps the most options open for what comes next.",f2Title:"Clear rows and columns",f2Text:"Fill an entire row or column to clear it and open space on the board.",f3Title:"Build combos",f3Text:"Consecutive clears earn more points and turn every run into a new attempt at your best result.",
+        galleryKicker:"Gallery",galleryTitle:"See the game as it really plays.",galleryLead:"Clean interface, colorful blocks and full focus on the board. No mandatory account: open, play and try to beat your own score.",capHome:"Home screen and best score.",capGameplay1:"Gameplay with the current piece trio.",capGameplay2:"Every run creates new decisions.",capGameOver:"Game over with optional Continue.",
+        featuresKicker:"Features",featuresTitle:"Quick games with choices that matter.",featuresLead:"Classic Grid Blocks keeps the core simple and adds optional tools when the board gets tight.",continueTitle:"Continue",continueText:"After game over, you can watch a rewarded ad and continue the run once.",swapTitle:"Swap",swapText:"When available, Swap lets you replace the current trio by watching a rewarded ad.",scoreTitle:"Score and best score",scoreText:"Track the current score and try to beat your personal best with every new run.",offlineTitle:"No account required",offlineText:"No login is required. Core gameplay works offline; ad-based features require an internet connection.",
+        faqTitle:"Quick questions.",faqLead:"Everything you need to know before installing.",q1:"Is Classic Grid Blocks free?",a1:"Yes. The Android game is free and supported by ads.",q2:"Do I need an account?",a2:"No. The game does not require login or account creation.",q3:"Does the game work offline?",a3:"Yes. Core gameplay works offline. Features that depend on ads require an internet connection.",q4:"How do ads work?",a4:"Optional rewarded ads are tied to features such as Continue and Swap, and interstitials may appear between games. Ads do not interrupt an active move.",q5:"Is Classic Grid Blocks available on iPhone?",a5:"Currently, the game is available only on Android through Google Play.",q6:"Which languages are available?",a6:"Brazilian Portuguese, English and Spanish.",
+        otherKicker:"More games",otherTitle:"Explore more from Demavinsky Games.",otherLead:"Discover other independent projects from the studio.",available:"Available",dualText:"A binary logic puzzle built around deduction, stats and daily challenges.",dualLink:"Discover Dual Grid →",catalogLabel:"Catalog",catalogTitle:"More indie games",catalogText:"See available titles and upcoming Demavinsky Games projects.",catalogLink:"View catalog →",ctaTitle:"Ready to beat your own best score?",ctaText:"Download Classic Grid Blocks for free on Android and start a new run.",ctaButton:"Get it on Google Play",footerGames:"Games",footerJoin:"Join us",footerPrivacy:"Privacy Policy",footerContact:"Contact",
+        altGameplayHero:"Classic Grid Blocks gameplay with a 10×10 board, score and three available pieces",altHome:"Classic Grid Blocks home screen showing best score and Play and Settings buttons",altGameplay97:"Classic Grid Blocks run with score 97, colorful board and three available pieces",altGameplay68:"Classic Grid Blocks run with colorful blocks arranged across the 10×10 board",altGameOver:"Classic Grid Blocks game over screen with the option to continue by watching a rewarded ad",altFeatureGraphic:"Official Classic Grid Blocks artwork showing the logo, colorful blocks and a block puzzle board"
+      },
+      es: {
+        seoTitle:"Classic Grid Blocks — Block Puzzle 10×10 para Android | Demavinsky Games",seoDescription:"Classic Grid Blocks es un block puzzle 10×10 gratuito para Android: coloca piezas, limpia filas y columnas, crea combos y supera tu récord.",
+        navHome:"Inicio",navGames:"Juegos",navJoin:"Participa",navAbout:"Sobre",navContact:"Contacto",crumbHome:"Inicio",crumbGames:"Juegos",heroKicker:"Block Puzzle • Android • Disponible",heroTitle:"Coloca. Limpia. Haz combos. Supera tu récord.",heroSub:"Classic Grid Blocks es un block puzzle 10×10 gratuito, creado para partidas rápidas, decisiones simples y esas ganas de jugar una vez más.",playNow:"Jugar en Google Play",howItWorksBtn:"Cómo funciona",factGenreLabel:"Género",factPlatformLabel:"Plataforma",factBoardLabel:"Tablero",factLangLabel:"Idiomas",factPriceLabel:"Precio",factPriceValue:"Gratis",
+        howKicker:"Cómo jugar",howTitle:"Fácil de entender. Con la estrategia justa.",howLead:"En cada ciclo recibes tres piezas. Arrástralas al tablero, completa filas o columnas y conserva espacio para seguir jugando. Mejores secuencias significan más puntos.",f1Title:"Elige una pieza",f1Text:"Analiza el trío disponible y elige la colocación que mantenga más posibilidades abiertas para las siguientes jugadas.",f2Title:"Limpia filas y columnas",f2Text:"Completa una fila o columna entera para limpiarla y liberar espacio en el tablero.",f3Title:"Crea combos",f3Text:"Las limpiezas consecutivas dan más puntos y convierten cada partida en un nuevo intento de superar tu mejor resultado.",
+        galleryKicker:"Galería",galleryTitle:"Así se ve el juego de verdad.",galleryLead:"Interfaz limpia, bloques coloridos y foco total en el tablero. Sin cuenta obligatoria: abre, juega e intenta superar tu propio récord.",capHome:"Pantalla inicial y mejor puntuación.",capGameplay1:"Partida con el trío de piezas disponible.",capGameplay2:"Cada partida crea nuevas decisiones.",capGameOver:"Fin de partida con Continue opcional.",
+        featuresKicker:"Funciones",featuresTitle:"Partidas rápidas con decisiones importantes.",featuresLead:"Classic Grid Blocks mantiene el núcleo simple y añade herramientas opcionales cuando el tablero se complica.",continueTitle:"Continue",continueText:"Después del fin de partida, puedes ver un anuncio recompensado y continuar una vez.",swapTitle:"Swap",swapText:"Cuando está disponible, Swap permite cambiar el trío actual viendo un anuncio recompensado.",scoreTitle:"Puntuación y récord",scoreText:"Sigue tu puntuación actual e intenta superar tu mejor marca en cada nueva partida.",offlineTitle:"Sin cuenta",offlineText:"No necesitas iniciar sesión. El gameplay funciona sin conexión; las funciones basadas en anuncios requieren internet.",
+        faqTitle:"Preguntas rápidas.",faqLead:"Todo lo que necesitas saber antes de instalar.",q1:"¿Classic Grid Blocks es gratis?",a1:"Sí. El juego para Android es gratuito y se monetiza con anuncios.",q2:"¿Necesito crear una cuenta?",a2:"No. El juego no exige inicio de sesión ni creación de cuenta.",q3:"¿El juego funciona sin conexión?",a3:"Sí. El gameplay funciona sin conexión. Las funciones que dependen de anuncios requieren internet.",q4:"¿Cómo funcionan los anuncios?",a4:"Hay anuncios recompensados opcionales ligados a funciones como Continue y Swap, además de interstitials entre partidas. Los anuncios no interrumpen una jugada en curso.",q5:"¿Classic Grid Blocks está disponible para iPhone?",a5:"Actualmente, el juego está disponible solo para Android a través de Google Play.",q6:"¿Qué idiomas están disponibles?",a6:"Portugués de Brasil, inglés y español.",
+        otherKicker:"Otros juegos",otherTitle:"Conoce más de Demavinsky Games.",otherLead:"Descubre otros proyectos independientes del estudio.",available:"Disponible",dualText:"Un puzzle de lógica binaria basado en deducción, estadísticas y desafíos diarios.",dualLink:"Conocer Dual Grid →",catalogLabel:"Catálogo",catalogTitle:"Más juegos indie",catalogText:"Consulta los títulos disponibles y los próximos proyectos de Demavinsky Games.",catalogLink:"Ver catálogo →",ctaTitle:"¿Listo para superar tu propio récord?",ctaText:"Descarga Classic Grid Blocks gratis para Android y empieza una nueva partida.",ctaButton:"Descargar en Google Play",footerGames:"Juegos",footerJoin:"Participa",footerPrivacy:"Política de Privacidad",footerContact:"Contacto",
+        altGameplayHero:"Gameplay de Classic Grid Blocks con tablero 10×10, puntuación y tres piezas disponibles",altHome:"Pantalla inicial de Classic Grid Blocks con mejor puntuación y botones Jugar y Configuración",altGameplay97:"Partida de Classic Grid Blocks con puntuación 97, tablero colorido y tres piezas disponibles",altGameplay68:"Partida de Classic Grid Blocks con diferentes bloques coloridos distribuidos por el tablero 10×10",altGameOver:"Pantalla de fin de partida de Classic Grid Blocks con opción de continuar viendo un anuncio recompensado",altFeatureGraphic:"Arte oficial de Classic Grid Blocks con el logo, bloques coloridos y un tablero de block puzzle"
+      }
+    };
+
+    const privacyAnchors={pt:"#pt",en:"#en",es:"#es"};
+    function applyLanguage(lang){
+      const selected=translations[lang]?lang:"pt";
+      const t=translations[selected];
+      document.documentElement.lang=selected==="pt"?"pt-BR":selected;
+      document.querySelectorAll("[data-i18n]").forEach(el=>{const key=el.dataset.i18n;if(t[key]) el.textContent=t[key];});
+      document.querySelectorAll("[data-alt-key]").forEach(el=>{const key=el.dataset.altKey;if(t[key]) el.alt=t[key];});
+      document.querySelectorAll(".language-button").forEach(btn=>btn.classList.toggle("active",btn.dataset.lang===selected));
+      document.title=t.seoTitle;
+      document.querySelector('meta[name="description"]').setAttribute("content",t.seoDescription);
+      document.querySelector('meta[property="og:title"]').setAttribute("content",t.seoTitle.replace(" | Demavinsky Games",""));
+      document.querySelector('meta[property="og:description"]').setAttribute("content",t.seoDescription);
+      document.querySelector('meta[name="twitter:title"]').setAttribute("content",t.seoTitle.replace(" | Demavinsky Games",""));
+      document.querySelector('meta[name="twitter:description"]').setAttribute("content",t.seoDescription);
+      document.getElementById("privacy-link").href="../../privacy.html"+privacyAnchors[selected];
+      localStorage.setItem("demavinsky-language",selected);
+    }
+    document.querySelectorAll(".language-button").forEach(btn=>btn.addEventListener("click",()=>applyLanguage(btn.dataset.lang)));
+    const saved=localStorage.getItem("demavinsky-language");
+    const browser=(navigator.language||"pt").toLowerCase();
+    let initial="pt";
+    if(saved&&translations[saved]) initial=saved; else if(browser.startsWith("en")) initial="en"; else if(browser.startsWith("es")) initial="es";
+    applyLanguage(initial);
+  </script>
+</body>
+</html>
