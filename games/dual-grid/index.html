@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dual Grid — Puzzle de Lógica Binária para Android | Demavinsky Games</title>
+  <meta name="description" content="Dual Grid é um puzzle de lógica binária gratuito para Android. Resolva desafios 6×6, 8×8 e 10×10, jogue puzzles diários, use dicas e acompanhe suas estatísticas." />
+  <meta name="theme-color" content="#090d25" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://demavinsky.com.br/games/dual-grid/" />
+  <link rel="icon" href="assets/app-icon.png" />
+  <link rel="apple-touch-icon" href="assets/app-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Demavinsky Games" />
+  <meta property="og:title" content="Dual Grid — Puzzle de Lógica Binária para Android" />
+  <meta property="og:description" content="Resolva tabuleiros de lógica binária, desafios diários e acompanhe seu progresso no Dual Grid." />
+  <meta property="og:url" content="https://demavinsky.com.br/games/dual-grid/" />
+  <meta property="og:image" content="https://demavinsky.com.br/games/dual-grid/assets/feature-graphic.png" />
+  <meta property="og:image:width" content="1024" />
+  <meta property="og:image:height" content="500" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dual Grid — Puzzle de Lógica Binária para Android" />
+  <meta name="twitter:description" content="Resolva puzzles de lógica binária e desafios diários." />
+  <meta name="twitter:image" content="https://demavinsky.com.br/games/dual-grid/assets/feature-graphic.png" />
+
+  <meta name="keywords" content="Dual Grid, binary logic puzzle, puzzle binário, jogo de lógica, Android, desafios diários, 6x6, 8x8, 10x10" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["SoftwareApplication", "VideoGame"],
+    "name": "Dual Grid: Binary Logic Puzzle",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Android",
+    "description": "Puzzle de lógica binária para Android com tabuleiros 6×6, 8×8 e 10×10, desafios diários, dicas e estatísticas.",
+    "url": "https://demavinsky.com.br/games/dual-grid/",
+    "image": "https://demavinsky.com.br/games/dual-grid/assets/app-icon.png",
+    "downloadUrl": "https://play.google.com/store/apps/details?id=com.demavinsky.binarylogic",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Demavinsky Games",
+      "url": "https://demavinsky.com.br/"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BRL"
+    }
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#090909;
+      --surface:#111827;
+      --surface-2:#1b2537;
+      --grid:#202c40;
+      --border:#2a3951;
+      --border-strong:#3b506f;
+      --text:#f8fafc;
+      --muted:#aab6c8;
+      --soft:#7f8ca0;
+      --blue:#4da3ff;
+      --blue-2:#79c6ff;
+      --max:1180px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 80% 8%,rgba(77,163,255,.08),transparent 24%),
+        radial-gradient(circle at 12% 42%,rgba(121,198,255,.035),transparent 28%),
+        var(--bg);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    .container{width:min(var(--max),90%);margin:0 auto}
+
+    .topbar{position:sticky;top:0;z-index:50;background:rgba(9,9,9,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)}
+    .topbar-inner{min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .brand img{width:38px;height:38px;object-fit:contain}
+    .nav-wrap{display:flex;align-items:center;gap:20px}
+    .nav{display:flex;align-items:center;gap:18px;color:var(--muted);font-size:.9rem}
+    .nav a:hover{color:var(--text)}
+    .language-bar{display:flex;gap:7px}
+    .language-button{color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:7px;padding:7px 10px;cursor:pointer;font-size:.78rem;letter-spacing:.04em}
+    .language-button.active,.language-button:hover{color:var(--bg);background:var(--text);border-color:var(--text)}
+
+    .breadcrumb{padding:24px 0 0;color:var(--soft);font-size:.82rem}
+    .breadcrumb a:hover{color:var(--text)}
+
+    .hero{padding:48px 0 76px;border-bottom:1px solid var(--border)}
+    .hero-grid{display:grid;grid-template-columns:1fr .92fr;gap:56px;align-items:center}
+    .product-logo{width:min(520px,90%);margin-bottom:22px;filter:drop-shadow(0 16px 44px rgba(0,0,0,.36))}
+    .kicker{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-2);margin-bottom:15px}
+    .hero h1{font-size:clamp(2.3rem,4.8vw,4.7rem);line-height:.98;letter-spacing:-.055em;max-width:720px}
+    .hero-sub{margin-top:22px;color:var(--muted);font-size:clamp(1.03rem,1.6vw,1.24rem);max-width:720px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:47px;padding:0 18px;border:1px solid var(--border-strong);border-radius:10px;font-weight:700;transition:.18s ease}
+    .button:hover{transform:translateY(-1px);border-color:var(--blue-2)}
+    .button.primary{background:linear-gradient(180deg,#58acff,#378de9);border-color:#67b7ff;color:#07111f;box-shadow:0 12px 32px rgba(77,163,255,.2)}
+    .button.secondary{color:var(--muted);background:rgba(255,255,255,.02)}
+    .hero-visual{border:1px solid var(--border);border-radius:28px;padding:18px;background:linear-gradient(160deg,rgba(77,163,255,.10),rgba(255,255,255,.02) 45%,rgba(121,198,255,.04)),var(--surface);box-shadow:0 30px 80px rgba(0,0,0,.34)}
+    .hero-visual img{border-radius:20px;width:100%;height:auto;object-fit:cover}
+
+    section{padding:86px 0;border-bottom:1px solid var(--border)}
+    .section-head{display:grid;grid-template-columns:.72fr 1.28fr;gap:56px;align-items:start;margin-bottom:36px}
+    .section-kicker{color:var(--soft);text-transform:uppercase;letter-spacing:.12em;font-size:.74rem;margin-bottom:8px}
+    h2{font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.045em;line-height:1.05}
+    .lead{color:var(--muted);font-size:1.04rem;max-width:760px}
+
+    .facts{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    .fact{border:1px solid var(--border);border-radius:14px;padding:20px;background:rgba(27,37,55,.78)}
+    .fact span{display:block;color:var(--soft);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+    .fact strong{font-size:1rem}
+
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .feature{border:1px solid var(--border);border-radius:16px;padding:26px;background:linear-gradient(180deg,rgba(255,255,255,.025),transparent),var(--surface-2)}
+    .feature .tag{display:inline-block;margin-bottom:14px;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--blue-2)}
+    .feature h3{font-size:1.25rem;margin-bottom:10px}
+    .feature p{color:var(--muted)}
+
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .gallery figure{border:1px solid var(--border);border-radius:18px;overflow:hidden;background:var(--surface);box-shadow:0 22px 50px rgba(0,0,0,.24)}
+    .gallery img{width:100%;aspect-ratio:919/2048;object-fit:cover}
+    .gallery figcaption{padding:12px 14px;color:var(--muted);font-size:.82rem;border-top:1px solid var(--border)}
+
+    .wide-graphic{margin-top:20px;border:1px solid var(--border);border-radius:18px;overflow:hidden;background:var(--surface)}
+    .wide-graphic img{width:100%;height:auto}
+
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .panel{border:1px solid var(--border);border-radius:16px;padding:28px;background:var(--surface-2)}
+    .panel h3{font-size:1.35rem;margin-bottom:10px}
+    .panel p{color:var(--muted)}
+
+    .faq{display:grid;gap:10px}
+    details{border:1px solid var(--border);border-radius:12px;background:var(--surface-2);padding:18px 20px}
+    summary{cursor:pointer;font-weight:700}
+    details p{color:var(--muted);margin-top:10px}
+
+    .cta{text-align:center;padding:96px 0}
+    .cta h2{max-width:760px;margin:0 auto}
+    .cta p{max-width:640px;margin:18px auto 28px;color:var(--muted)}
+
+    .other-games{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .game-card{border:1px solid var(--border);border-radius:16px;padding:24px;background:var(--surface-2)}
+    .game-card small{color:var(--soft);text-transform:uppercase;letter-spacing:.1em}
+    .game-card h3{font-size:1.4rem;margin:8px 0}
+    .game-card p{color:var(--muted);margin-bottom:14px}
+    .game-card a{color:var(--blue-2);font-weight:700}
+
+    footer{padding:36px 0 46px;color:var(--soft);font-size:.88rem;background:#090909}
+    .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .footer-links{display:flex;gap:16px;flex-wrap:wrap}
+    .footer-links a:hover{color:var(--text)}
+
+    @media (max-width:980px){
+      .hero-grid,.section-head,.split{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .facts{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:650px){
+      .nav{display:none}
+      .gallery,.feature-grid,.other-games,.facts{grid-template-columns:1fr}
+      .hero{padding-top:38px}
+      .product-logo{width:min(460px,100%)}
+    }
+  
+    /* STANDARD HEADER */
+    body { padding-top: 66px; }
+
+    .topbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      background: rgba(9,9,9,.82);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      backdrop-filter: blur(18px);
+    }
+    .topbar-inner {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+    .brand-logo { width: 38px; height: 38px; object-fit: contain; }
+    .top-actions { display: flex; align-items: center; gap: 18px; }
+    .nav-links { display: flex; align-items: center; gap: 16px; color: var(--muted); font-size: .86rem; }
+    .nav-links a { color: inherit; transition: .18s ease; }
+    .nav-links a:hover { color: var(--text); }
+    .language-bar { display: flex; gap: 7px; }
+    .language-button {
+      color: var(--muted); background: transparent; border: 1px solid var(--border);
+      border-radius: 7px; padding: 7px 10px; cursor: pointer; font-size: .78rem;
+      letter-spacing: .04em; transition: .18s ease;
+    }
+    .language-button:hover, .language-button.active {
+      color: var(--bg); background: var(--text); border-color: var(--text);
+    }
+    @media (max-width: 800px) { .nav-links { display: none; } }
+    @media (max-width: 560px) { .brand span:last-child { display:none; } .brand-logo { width:34px; height:34px; } }
+
+    /* Ajustes próprios do Dual Grid, preservando o layout da página de referência */
+    :root { --surface:#11172f; --surface-2:#171d3a; --border:#29335a; --border-strong:#47518a; --blue:#16adff; --blue-2:#a98bff; }
+    body { background:radial-gradient(circle at 80% 8%,rgba(75,61,221,.13),transparent 28%),radial-gradient(circle at 10% 24%,rgba(0,170,255,.07),transparent 26%),#090909; }
+    .button.primary {background:linear-gradient(110deg,#04b4ff,#9953f7);border-color:#547bff;color:#fff;box-shadow:0 12px 30px rgba(58,83,255,.18)}
+    .hero-visual {background:linear-gradient(145deg,rgba(29,116,255,.13),rgba(138,50,245,.09)),var(--surface)}
+    .dual-wordmark {width:100%;max-width:510px;border-radius:16px;max-height:260px;object-fit:cover;object-position:center}
+    .dual-gallery {grid-template-columns:repeat(5,minmax(0,1fr))}
+    .dual-gallery img {aspect-ratio:9/16;object-fit:cover}
+    @media(max-width:980px){.dual-gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(max-width:650px){.dual-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  </style>
+</head>
+<body>
+  <nav class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="../../index.html" aria-label="Demavinsky Games home">
+        <img class="brand-logo" src="../../assets/demavinsky-logo.png" alt="Demavinsky Games logo" />
+        <span>Demavinsky Games</span>
+      </a>
+      <div class="top-actions">
+        <div class="nav-links" aria-label="Primary navigation">
+          <a href="../../index.html" data-i18n="navHome">Início</a>
+          <a href="../index.html" data-i18n="navGames">Jogos</a>
+          <a href="../../join/index.html" data-i18n="navJoin">Faça parte</a>
+          <a href="../../index.html#about" data-i18n="navAbout">Sobre</a>
+          <a href="../../index.html#contact" data-i18n="navContact">Contato</a>
+        </div>
+        <div class="language-bar" aria-label="Language selector">
+          <button class="language-button" data-lang="pt" type="button">PT</button>
+          <button class="language-button" data-lang="en" type="button">EN</button>
+          <button class="language-button" data-lang="es" type="button">ES</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container breadcrumb"><a href="../../index.html" data-i18n="crumbHome">Início</a> / <a href="../index.html" data-i18n="crumbGames">Jogos</a> / Dual Grid</div>
+  <header class="hero"><div class="container hero-grid"><div>
+    <img class="product-logo dual-wordmark" src="assets/brand-graphic.png" alt="Dual Grid: Binary Logic Puzzle — identidade visual oficial" data-alt-key="altBrand" />
+    <div class="kicker" data-i18n="heroKicker">Puzzle de lógica binária • Android • Disponível</div>
+    <h1 data-i18n="heroTitle">Lógica binária. Foco absoluto.</h1>
+    <p class="hero-sub" data-i18n="heroSub">Desafie seu raciocínio com tabuleiros de lógica binária, diferentes dificuldades e um novo puzzle todos os dias.</p>
+    <div class="hero-actions"><a class="button primary" href="https://play.google.com/store/apps/details?id=com.demavinsky.binarylogic" target="_blank" rel="noopener noreferrer" data-i18n="playNow">Jogar no Google Play</a><a class="button secondary" href="#como-funciona" data-i18n="howItWorksBtn">Como jogar</a></div>
+  </div><div class="hero-visual"><img src="assets/screen-home.png" alt="Tela inicial de Dual Grid com opções de puzzle diário e tamanho do tabuleiro" data-alt-key="altHome" /></div></div></header>
+  <main>
+    <section><div class="container"><div class="facts">
+      <div class="fact"><span data-i18n="factGenreLabel">Gênero</span><strong data-i18n="factGenreValue">Puzzle de lógica</strong></div>
+      <div class="fact"><span data-i18n="factPlatformLabel">Plataforma</span><strong>Android</strong></div>
+      <div class="fact"><span data-i18n="factBoardLabel">Tabuleiros</span><strong>6×6 • 8×8 • 10×10</strong></div>
+      <div class="fact"><span data-i18n="factLangLabel">Idiomas</span><strong>PT • EN • ES</strong></div>
+      <div class="fact"><span data-i18n="factPriceLabel">Preço</span><strong data-i18n="factPriceValue">Grátis</strong></div>
+    </div></div></section>
+    <section id="como-funciona"><div class="container"><div class="section-head"><div><p class="section-kicker" data-i18n="howKicker">Como jogar</p><h2 data-i18n="howTitle">Cada célula importa.</h2></div><p class="lead" data-i18n="howLead">Preencha o tabuleiro com 0 e 1 usando dedução. Escolha o tamanho e a dificuldade, analise as possibilidades e encontre a solução sem depender de palpites.</p></div><div class="feature-grid">
+      <article class="feature"><span class="tag">01</span><h3 data-i18n="f1Title">Escolha o desafio</h3><p data-i18n="f1Text">Jogue em tabuleiros 6×6, 8×8 ou 10×10 e ajuste a dificuldade para o desafio que procura.</p></article>
+      <article class="feature"><span class="tag">02</span><h3 data-i18n="f2Title">Preencha com lógica</h3><p data-i18n="f2Text">Analise as células, marque 0 ou 1 e resolva o puzzle por dedução.</p></article>
+      <article class="feature"><span class="tag">03</span><h3 data-i18n="f3Title">Evolua todos os dias</h3><p data-i18n="f3Text">Encare um puzzle diário, acompanhe seu histórico e busque melhorar seus resultados.</p></article>
+    </div></div></section>
+    <section><div class="container"><div class="section-head"><div><p class="section-kicker" data-i18n="galleryKicker">Galeria</p><h2 data-i18n="galleryTitle">Conheça o Dual Grid.</h2></div><p class="lead" data-i18n="galleryLead">Imagens promocionais oficiais que mostram o tabuleiro, os desafios diários, as dicas e o acompanhamento de progresso.</p></div>
+      <div class="gallery dual-gallery">
+        <figure><img loading="lazy" src="assets/screen-home.png" alt="Dual Grid: tela inicial com tamanhos e dificuldades" data-alt-key="altHome"/><figcaption data-i18n="capHome">Escolha seu desafio.</figcaption></figure>
+        <figure><img loading="lazy" src="assets/screen-gameplay.png" alt="Dual Grid: puzzle binário com células 0 e 1" data-alt-key="altGameplay"/><figcaption data-i18n="capGameplay">Resolva com lógica.</figcaption></figure>
+        <figure><img loading="lazy" src="assets/screen-daily.png" alt="Dual Grid: desafio diário" data-alt-key="altDaily"/><figcaption data-i18n="capDaily">Um novo puzzle a cada dia.</figcaption></figure>
+        <figure><img loading="lazy" src="assets/screen-hints.png" alt="Dual Grid: opção de dica para resolver o puzzle" data-alt-key="altHints"/><figcaption data-i18n="capHints">Dicas quando precisar.</figcaption></figure>
+        <figure><img loading="lazy" src="assets/screen-stats.png" alt="Dual Grid: painel de estatísticas e progresso" data-alt-key="altStats"/><figcaption data-i18n="capStats">Acompanhe sua evolução.</figcaption></figure>
+      </div>
+      <div class="wide-graphic"><img loading="lazy" src="assets/feature-graphic.png" alt="Arte oficial de Dual Grid: Binary Logic Puzzle com peças azuis e roxas e tabuleiro binário" data-alt-key="altFeature"/></div>
+    </div></section>
+    <section><div class="container"><div class="section-head"><div><p class="section-kicker" data-i18n="featuresKicker">Recursos</p><h2 data-i18n="featuresTitle">Desafios para o seu ritmo.</h2></div><p class="lead" data-i18n="featuresLead">Uma experiência de lógica que combina níveis de dificuldade, recursos de apoio e motivos para voltar a jogar.</p></div><div class="split">
+      <div class="panel"><h3 data-i18n="sizesTitle">Três tamanhos de tabuleiro</h3><p data-i18n="sizesText">Alterne entre 6×6, 8×8 e 10×10 para variar a complexidade dos desafios.</p></div>
+      <div class="panel"><h3 data-i18n="dailyTitle">Puzzle diário</h3><p data-i18n="dailyText">Encontre um novo desafio a cada dia e acompanhe sua sequência.</p></div>
+      <div class="panel"><h3 data-i18n="toolsTitle">Desfazer, apagar e verificar</h3><p data-i18n="toolsText">Revise suas decisões com os controles do jogo e use dicas quando precisar de ajuda.</p></div>
+      <div class="panel"><h3 data-i18n="statsTitle">Estatísticas e progresso</h3><p data-i18n="statsText">Acompanhe puzzles concluídos, tempo de jogo, melhores tempos e outros indicadores de desempenho.</p></div>
+    </div></div></section>
+    <section><div class="container"><div class="section-head"><div><p class="section-kicker">FAQ</p><h2 data-i18n="faqTitle">Perguntas frequentes.</h2></div><p class="lead" data-i18n="faqLead">Informações rápidas antes de começar.</p></div><div class="faq">
+      <details><summary data-i18n="q1">Dual Grid é gratuito?</summary><p data-i18n="a1">Sim. O jogo é gratuito para Android e pode exibir anúncios.</p></details>
+      <details><summary data-i18n="q2">Quais tamanhos de tabuleiro existem?</summary><p data-i18n="a2">Você pode jogar em tabuleiros de 6×6, 8×8 e 10×10.</p></details>
+      <details><summary data-i18n="q3">Há puzzles diários?</summary><p data-i18n="a3">Sim. O Dual Grid oferece desafios diários além das partidas de exploração.</p></details>
+      <details><summary data-i18n="q4">Posso usar dicas?</summary><p data-i18n="a4">Sim. Há um recurso de dicas e controles para desfazer, apagar e verificar as jogadas.</p></details>
+      <details><summary data-i18n="q5">Está disponível para iPhone?</summary><p data-i18n="a5">Atualmente, a versão publicada está disponível para Android na Google Play.</p></details>
+      <details><summary data-i18n="q6">Quais idiomas são suportados?</summary><p data-i18n="a6">Português do Brasil, inglês e espanhol.</p></details>
+    </div></div></section>
+    <section><div class="container"><div class="section-head"><div><p class="section-kicker" data-i18n="otherKicker">Outros jogos</p><h2 data-i18n="otherTitle">Mais jogos da Demavinsky Games.</h2></div><p class="lead" data-i18n="otherLead">Descubra outras experiências mobile do estúdio.</p></div><div class="other-games">
+      <article class="game-card"><small data-i18n="available">Disponível</small><h3>Classic Grid Blocks</h3><p data-i18n="classicText">Um block puzzle 10×10 de encaixes, limpeza de linhas e combos.</p><a href="../classic-grid-blocks/index.html" data-i18n="classicLink">Conhecer Classic Grid Blocks →</a></article>
+      <article class="game-card"><small data-i18n="catalogLabel">Catálogo</small><h3 data-i18n="catalogTitle">Mais jogos indie</h3><p data-i18n="catalogText">Veja todos os jogos e projetos em desenvolvimento.</p><a href="../index.html" data-i18n="catalogLink">Ver catálogo →</a></article>
+    </div></div></section>
+    <section class="cta"><div class="container"><h2 data-i18n="ctaTitle">Pronto para o próximo desafio?</h2><p data-i18n="ctaText">Baixe Dual Grid gratuitamente para Android e comece a resolver puzzles de lógica binária.</p><a class="button primary" href="https://play.google.com/store/apps/details?id=com.demavinsky.binarylogic" target="_blank" rel="noopener noreferrer" data-i18n="ctaButton">Baixar no Google Play</a></div></section>
+  </main>
+  <footer><div class="container footer-inner"><span>© 2026 Demavinsky Games</span><div class="footer-links"><a href="../index.html" data-i18n="footerGames">Jogos</a><a href="../../join/index.html" data-i18n="footerJoin">Faça parte</a><a href="../../privacy.html#pt" id="privacy-link" data-i18n="footerPrivacy">Política de Privacidade</a><a href="mailto:contato@demavinsky.com.br" data-i18n="footerContact">Contato</a></div></div></footer>
+  <script>
+    const translations = {
+  "pt": {
+    "seoTitle": "Dual Grid — Puzzle de Lógica Binária para Android | Demavinsky Games",
+    "seoDescription": "Dual Grid é um puzzle de lógica binária gratuito para Android com tabuleiros 6×6, 8×8 e 10×10, desafios diários, dicas e estatísticas.",
+    "navHome": "Início",
+    "navGames": "Jogos",
+    "navJoin": "Faça parte",
+    "navAbout": "Sobre",
+    "navContact": "Contato",
+    "crumbHome": "Início",
+    "crumbGames": "Jogos",
+    "heroKicker": "Puzzle de lógica binária • Android • Disponível",
+    "heroTitle": "Lógica binária. Foco absoluto.",
+    "heroSub": "Desafie seu raciocínio com tabuleiros de lógica binária, diferentes dificuldades e um novo puzzle todos os dias.",
+    "playNow": "Jogar no Google Play",
+    "howItWorksBtn": "Como jogar",
+    "factGenreLabel": "Gênero",
+    "factGenreValue": "Puzzle de lógica",
+    "factPlatformLabel": "Plataforma",
+    "factBoardLabel": "Tabuleiros",
+    "factLangLabel": "Idiomas",
+    "factPriceLabel": "Preço",
+    "factPriceValue": "Grátis",
+    "howKicker": "Como jogar",
+    "howTitle": "Cada célula importa.",
+    "howLead": "Preencha o tabuleiro com 0 e 1 usando dedução. Escolha o tamanho e a dificuldade, analise as possibilidades e encontre a solução.",
+    "f1Title": "Escolha o desafio",
+    "f1Text": "Jogue em tabuleiros 6×6, 8×8 ou 10×10 e ajuste a dificuldade para o desafio que procura.",
+    "f2Title": "Preencha com lógica",
+    "f2Text": "Analise as células, marque 0 ou 1 e resolva o puzzle por dedução.",
+    "f3Title": "Evolua todos os dias",
+    "f3Text": "Encare um puzzle diário, acompanhe seu histórico e busque melhorar seus resultados.",
+    "galleryKicker": "Galeria",
+    "galleryTitle": "Conheça o Dual Grid.",
+    "galleryLead": "Imagens promocionais oficiais que mostram o tabuleiro, os desafios diários, as dicas e o acompanhamento de progresso.",
+    "capHome": "Escolha seu desafio.",
+    "capGameplay": "Resolva com lógica.",
+    "capDaily": "Um novo puzzle a cada dia.",
+    "capHints": "Dicas quando precisar.",
+    "capStats": "Acompanhe sua evolução.",
+    "featuresKicker": "Recursos",
+    "featuresTitle": "Desafios para o seu ritmo.",
+    "featuresLead": "Uma experiência de lógica que combina níveis de dificuldade, recursos de apoio e motivos para voltar a jogar.",
+    "sizesTitle": "Três tamanhos de tabuleiro",
+    "sizesText": "Alterne entre 6×6, 8×8 e 10×10 para variar a complexidade dos desafios.",
+    "dailyTitle": "Puzzle diário",
+    "dailyText": "Encontre um novo desafio a cada dia e acompanhe sua sequência.",
+    "toolsTitle": "Desfazer, apagar e verificar",
+    "toolsText": "Revise suas decisões com os controles do jogo e use dicas quando precisar de ajuda.",
+    "statsTitle": "Estatísticas e progresso",
+    "statsText": "Acompanhe puzzles concluídos, tempo de jogo, melhores tempos e outros indicadores de desempenho.",
+    "faqTitle": "Perguntas frequentes.",
+    "faqLead": "Informações rápidas antes de começar.",
+    "q1": "Dual Grid é gratuito?",
+    "a1": "Sim. O jogo é gratuito para Android e pode exibir anúncios.",
+    "q2": "Quais tamanhos de tabuleiro existem?",
+    "a2": "Você pode jogar em tabuleiros de 6×6, 8×8 e 10×10.",
+    "q3": "Há puzzles diários?",
+    "a3": "Sim. O Dual Grid oferece desafios diários além das partidas de exploração.",
+    "q4": "Posso usar dicas?",
+    "a4": "Sim. Há um recurso de dicas e controles para desfazer, apagar e verificar as jogadas.",
+    "q5": "Está disponível para iPhone?",
+    "a5": "Atualmente, a versão publicada está disponível para Android na Google Play.",
+    "q6": "Quais idiomas são suportados?",
+    "a6": "Português do Brasil, inglês e espanhol.",
+    "otherKicker": "Outros jogos",
+    "otherTitle": "Mais jogos da Demavinsky Games.",
+    "otherLead": "Descubra outras experiências mobile do estúdio.",
+    "available": "Disponível",
+    "classicText": "Um block puzzle 10×10 de encaixes, limpeza de linhas e combos.",
+    "classicLink": "Conhecer Classic Grid Blocks →",
+    "catalogLabel": "Catálogo",
+    "catalogTitle": "Mais jogos indie",
+    "catalogText": "Veja todos os jogos e projetos em desenvolvimento.",
+    "catalogLink": "Ver catálogo →",
+    "ctaTitle": "Pronto para o próximo desafio?",
+    "ctaText": "Baixe Dual Grid gratuitamente para Android e comece a resolver puzzles de lógica binária.",
+    "ctaButton": "Baixar no Google Play",
+    "footerGames": "Jogos",
+    "footerJoin": "Faça parte",
+    "footerPrivacy": "Política de Privacidade",
+    "footerContact": "Contato",
+    "altBrand": "Arte oficial do Dual Grid com logotipo e tabuleiro de lógica binária",
+    "altHome": "Tela inicial do Dual Grid com opções de desafio diário, tamanhos e dificuldades",
+    "altGameplay": "Puzzle de lógica binária do Dual Grid com células preenchidas com 0 e 1",
+    "altDaily": "Desafio diário do Dual Grid com puzzle do dia e progresso de sequência",
+    "altHints": "Tela do Dual Grid com opção de usar dica durante uma partida",
+    "altStats": "Painel de estatísticas do Dual Grid com puzzles concluídos e tempos",
+    "altFeature": "Arte promocional oficial do Dual Grid com tabuleiro binário e peças azuis e roxas"
+  },
+  "en": {
+    "seoTitle": "Dual Grid — Binary Logic Puzzle for Android | Demavinsky Games",
+    "seoDescription": "Dual Grid is a free binary logic puzzle for Android with 6×6, 8×8 and 10×10 boards, daily challenges, hints and statistics.",
+    "navHome": "Home",
+    "navGames": "Games",
+    "navJoin": "Join",
+    "navAbout": "About",
+    "navContact": "Contact",
+    "crumbHome": "Home",
+    "crumbGames": "Games",
+    "heroKicker": "Binary logic puzzle • Android • Available",
+    "heroTitle": "Binary logic. Absolute focus.",
+    "heroSub": "Challenge your reasoning with binary logic boards, multiple difficulty levels and a fresh daily puzzle.",
+    "playNow": "Play on Google Play",
+    "howItWorksBtn": "How to play",
+    "factGenreLabel": "Genre",
+    "factGenreValue": "Logic puzzle",
+    "factPlatformLabel": "Platform",
+    "factBoardLabel": "Board sizes",
+    "factLangLabel": "Languages",
+    "factPriceLabel": "Price",
+    "factPriceValue": "Free",
+    "howKicker": "How to play",
+    "howTitle": "Every cell matters.",
+    "howLead": "Fill the board with 0s and 1s using deduction. Choose a board size and difficulty, consider the possibilities and find the solution.",
+    "f1Title": "Choose your challenge",
+    "f1Text": "Play on 6×6, 8×8 or 10×10 boards and select the difficulty that fits you.",
+    "f2Title": "Solve with logic",
+    "f2Text": "Analyze the cells, place 0s and 1s and complete the puzzle through deduction.",
+    "f3Title": "Improve every day",
+    "f3Text": "Take on a daily puzzle, review your history and work toward better results.",
+    "galleryKicker": "Gallery",
+    "galleryTitle": "Discover Dual Grid.",
+    "galleryLead": "Official promotional images showing gameplay, daily puzzles, hints and progress tracking.",
+    "capHome": "Choose your challenge.",
+    "capGameplay": "Solve with logic.",
+    "capDaily": "A new puzzle every day.",
+    "capHints": "Hints when you need them.",
+    "capStats": "Track your progress.",
+    "featuresKicker": "Features",
+    "featuresTitle": "Challenges at your pace.",
+    "featuresLead": "A logic game combining adjustable difficulty, helpful tools and reasons to return.",
+    "sizesTitle": "Three board sizes",
+    "sizesText": "Switch between 6×6, 8×8 and 10×10 to vary the challenge.",
+    "dailyTitle": "Daily puzzle",
+    "dailyText": "Find a fresh challenge every day and track your streak.",
+    "toolsTitle": "Undo, erase and check",
+    "toolsText": "Review your moves with in-game controls and use hints when you need help.",
+    "statsTitle": "Statistics and progress",
+    "statsText": "Track completed puzzles, time played, best times and other performance metrics.",
+    "faqTitle": "Frequently asked questions.",
+    "faqLead": "Quick answers before you start.",
+    "q1": "Is Dual Grid free?",
+    "a1": "Yes. The Android game is free and may show ads.",
+    "q2": "What board sizes are available?",
+    "a2": "You can play 6×6, 8×8 and 10×10 boards.",
+    "q3": "Does it have daily puzzles?",
+    "a3": "Yes. Dual Grid offers daily challenges alongside exploration puzzles.",
+    "q4": "Can I use hints?",
+    "a4": "Yes. Hints are available, along with undo, erase and check controls.",
+    "q5": "Is it available for iPhone?",
+    "a5": "The currently published version is available for Android on Google Play.",
+    "q6": "Which languages are supported?",
+    "a6": "Brazilian Portuguese, English and Spanish.",
+    "otherKicker": "More games",
+    "otherTitle": "More from Demavinsky Games.",
+    "otherLead": "Discover other mobile games by the studio.",
+    "available": "Available",
+    "classicText": "A 10×10 block puzzle about placing pieces, clearing lines and building combos.",
+    "classicLink": "Discover Classic Grid Blocks →",
+    "catalogLabel": "Catalog",
+    "catalogTitle": "More indie games",
+    "catalogText": "See all games and projects in development.",
+    "catalogLink": "View catalog →",
+    "ctaTitle": "Ready for your next challenge?",
+    "ctaText": "Download Dual Grid for free on Android and start solving binary logic puzzles.",
+    "ctaButton": "Get it on Google Play",
+    "footerGames": "Games",
+    "footerJoin": "Join",
+    "footerPrivacy": "Privacy Policy",
+    "footerContact": "Contact",
+    "altBrand": "Official Dual Grid artwork showing the logo and a binary logic grid",
+    "altHome": "Dual Grid home screen with daily challenge, board sizes and difficulties",
+    "altGameplay": "Dual Grid binary puzzle with cells filled with 0s and 1s",
+    "altDaily": "Dual Grid daily challenge screen with daily puzzle and streak progress",
+    "altHints": "Dual Grid screen with an option to use hints during a puzzle",
+    "altStats": "Dual Grid statistics showing completed puzzles and times",
+    "altFeature": "Official Dual Grid promotional artwork with blue and purple binary tiles"
+  },
+  "es": {
+    "seoTitle": "Dual Grid — Puzzle de Lógica Binaria para Android | Demavinsky Games",
+    "seoDescription": "Dual Grid es un puzzle de lógica binaria gratuito para Android con tableros 6×6, 8×8 y 10×10, desafíos diarios, pistas y estadísticas.",
+    "navHome": "Inicio",
+    "navGames": "Juegos",
+    "navJoin": "Participa",
+    "navAbout": "Nosotros",
+    "navContact": "Contacto",
+    "crumbHome": "Inicio",
+    "crumbGames": "Juegos",
+    "heroKicker": "Puzzle de lógica binaria • Android • Disponible",
+    "heroTitle": "Lógica binaria. Concentración absoluta.",
+    "heroSub": "Pon a prueba tu razonamiento con tableros de lógica binaria, varias dificultades y un nuevo puzzle cada día.",
+    "playNow": "Jugar en Google Play",
+    "howItWorksBtn": "Cómo jugar",
+    "factGenreLabel": "Género",
+    "factGenreValue": "Puzzle de lógica",
+    "factPlatformLabel": "Plataforma",
+    "factBoardLabel": "Tableros",
+    "factLangLabel": "Idiomas",
+    "factPriceLabel": "Precio",
+    "factPriceValue": "Gratis",
+    "howKicker": "Cómo jugar",
+    "howTitle": "Cada celda importa.",
+    "howLead": "Rellena el tablero con 0 y 1 usando deducción. Elige un tamaño y una dificultad, analiza las posibilidades y encuentra la solución.",
+    "f1Title": "Elige tu desafío",
+    "f1Text": "Juega en tableros de 6×6, 8×8 o 10×10 y selecciona la dificultad.",
+    "f2Title": "Resuelve con lógica",
+    "f2Text": "Analiza las celdas, coloca 0 y 1 y completa el puzzle mediante deducción.",
+    "f3Title": "Mejora cada día",
+    "f3Text": "Enfréntate al puzzle diario, revisa tu historial y busca mejores resultados.",
+    "galleryKicker": "Galería",
+    "galleryTitle": "Descubre Dual Grid.",
+    "galleryLead": "Imágenes promocionales oficiales con el tablero, desafíos diarios, pistas y estadísticas.",
+    "capHome": "Elige tu desafío.",
+    "capGameplay": "Resuelve con lógica.",
+    "capDaily": "Un puzzle nuevo cada día.",
+    "capHints": "Pistas cuando las necesites.",
+    "capStats": "Sigue tu progreso.",
+    "featuresKicker": "Funciones",
+    "featuresTitle": "Desafíos a tu ritmo.",
+    "featuresLead": "Un juego de lógica que combina dificultad ajustable, herramientas y motivos para volver.",
+    "sizesTitle": "Tres tamaños de tablero",
+    "sizesText": "Alterna entre 6×6, 8×8 y 10×10 para variar la dificultad.",
+    "dailyTitle": "Puzzle diario",
+    "dailyText": "Encuentra un nuevo desafío cada día y sigue tu racha.",
+    "toolsTitle": "Deshacer, borrar y verificar",
+    "toolsText": "Revisa tus movimientos con los controles del juego y usa pistas si necesitas ayuda.",
+    "statsTitle": "Estadísticas y progreso",
+    "statsText": "Sigue los puzzles completados, el tiempo jugado, los mejores tiempos y otras estadísticas.",
+    "faqTitle": "Preguntas frecuentes.",
+    "faqLead": "Respuestas rápidas antes de empezar.",
+    "q1": "¿Dual Grid es gratis?",
+    "a1": "Sí. El juego para Android es gratuito y puede mostrar anuncios.",
+    "q2": "¿Qué tamaños de tablero hay?",
+    "a2": "Puedes jugar tableros de 6×6, 8×8 y 10×10.",
+    "q3": "¿Hay puzzles diarios?",
+    "a3": "Sí. Dual Grid ofrece desafíos diarios además de los puzzles de exploración.",
+    "q4": "¿Puedo usar pistas?",
+    "a4": "Sí. Hay pistas y controles para deshacer, borrar y verificar movimientos.",
+    "q5": "¿Está disponible para iPhone?",
+    "a5": "La versión actualmente publicada está disponible para Android en Google Play.",
+    "q6": "¿Qué idiomas están disponibles?",
+    "a6": "Portugués de Brasil, inglés y español.",
+    "otherKicker": "Otros juegos",
+    "otherTitle": "Más juegos de Demavinsky Games.",
+    "otherLead": "Descubre otros juegos móviles del estudio.",
+    "available": "Disponible",
+    "classicText": "Un puzzle de bloques 10×10 donde colocas piezas, limpias líneas y creas combos.",
+    "classicLink": "Conocer Classic Grid Blocks →",
+    "catalogLabel": "Catálogo",
+    "catalogTitle": "Más juegos indie",
+    "catalogText": "Consulta todos los juegos y proyectos en desarrollo.",
+    "catalogLink": "Ver catálogo →",
+    "ctaTitle": "¿Listo para el próximo desafío?",
+    "ctaText": "Descarga Dual Grid gratis para Android y empieza a resolver puzzles de lógica binaria.",
+    "ctaButton": "Descargar en Google Play",
+    "footerGames": "Juegos",
+    "footerJoin": "Participa",
+    "footerPrivacy": "Política de Privacidad",
+    "footerContact": "Contacto",
+    "altBrand": "Arte oficial de Dual Grid con logo y tablero de lógica binaria",
+    "altHome": "Pantalla inicial de Dual Grid con desafío diario, tamaños y dificultades",
+    "altGameplay": "Puzzle binario de Dual Grid con celdas rellenas con 0 y 1",
+    "altDaily": "Desafío diario de Dual Grid con puzzle del día y seguimiento de racha",
+    "altHints": "Pantalla de Dual Grid con opción de pistas",
+    "altStats": "Estadísticas de Dual Grid con puzzles completados y tiempos",
+    "altFeature": "Arte promocional oficial de Dual Grid con fichas binarias azules y moradas"
+  }
+};
+
+    const privacyAnchors={pt:"#pt",en:"#en",es:"#es"};
+    function applyLanguage(lang){
+      const selected=translations[lang]?lang:"pt";
+      const t=translations[selected];
+      document.documentElement.lang=selected==="pt"?"pt-BR":selected;
+      document.querySelectorAll("[data-i18n]").forEach(el=>{const key=el.dataset.i18n;if(t[key]) el.textContent=t[key];});
+      document.querySelectorAll("[data-alt-key]").forEach(el=>{const key=el.dataset.altKey;if(t[key]) el.alt=t[key];});
+      document.querySelectorAll(".language-button").forEach(btn=>btn.classList.toggle("active",btn.dataset.lang===selected));
+      document.title=t.seoTitle;
+      document.querySelector('meta[name="description"]').setAttribute("content",t.seoDescription);
+      document.querySelector('meta[property="og:title"]').setAttribute("content",t.seoTitle.replace(" | Demavinsky Games",""));
+      document.querySelector('meta[property="og:description"]').setAttribute("content",t.seoDescription);
+      document.querySelector('meta[name="twitter:title"]').setAttribute("content",t.seoTitle.replace(" | Demavinsky Games",""));
+      document.querySelector('meta[name="twitter:description"]').setAttribute("content",t.seoDescription);
+      document.getElementById("privacy-link").href="../../privacy.html"+privacyAnchors[selected];
+      localStorage.setItem("demavinsky-language",selected);
+    }
+    document.querySelectorAll(".language-button").forEach(btn=>btn.addEventListener("click",()=>applyLanguage(btn.dataset.lang)));
+    const saved=localStorage.getItem("demavinsky-language");
+    const browser=(navigator.language||"pt").toLowerCase();
+    let initial="pt";
+    if(saved&&translations[saved]) initial=saved; else if(browser.startsWith("en")) initial="en"; else if(browser.startsWith("es")) initial="es";
+    applyLanguage(initial);
+  </script>
+</body>
+</html>
