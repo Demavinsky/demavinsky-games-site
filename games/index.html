@@ -385,6 +385,22 @@
       .topbar .language-bar, .topbar .header-languages { gap: 4px; }
       .topbar .language-button, .topbar .header-languages a { padding: 7px 8px; }
     }
+
+    /* PentaRove: destaque exclusivo do terceiro jogo publicado. */
+    .pentarove-card {
+      cursor: pointer;
+      background: linear-gradient(145deg, rgba(116,80,234,.20), rgba(28,32,83,.24) 56%, rgba(43,195,242,.10)), var(--surface);
+      border-color: rgba(151,113,255,.56);
+      box-shadow: inset 0 1px 0 rgba(210,170,255,.10), 0 10px 36px rgba(0,0,0,.18);
+    }
+    .pentarove-card:hover {
+      border-color: rgba(193,146,255,.88);
+      background: linear-gradient(145deg, rgba(116,80,234,.27), rgba(28,32,83,.30) 56%, rgba(43,195,242,.14)), var(--surface);
+    }
+    .pentarove-card .card-page-link { position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+    .pentarove-card .card-page-link:focus-visible { outline: 2px solid #c59bff; outline-offset: -3px; }
+    .pentarove-card .card-actions { position: relative; z-index: 2; }
+    .pentarove-card .status { color: #d4b4ff; border-color: rgba(155,110,255,.56); background: rgba(130,90,255,.16); }
   </style>
 </head>
 <body>
@@ -440,8 +456,8 @@
       <aside class="catalog-summary" aria-label="Catalog summary">
         <div class="catalog-summary-label" data-i18n="catalogSummary">Current catalog</div>
         <div class="catalog-stats">
-          <div class="catalog-stat"><strong>2</strong><span data-i18n="statPublished">published</span></div>
-          <div class="catalog-stat"><strong>3</strong><span data-i18n="statDevelopment">in development</span></div>
+          <div class="catalog-stat"><strong>3</strong><span data-i18n="statPublished">published</span></div>
+          <div class="catalog-stat"><strong>2</strong><span data-i18n="statDevelopment">in development</span></div>
           <div class="catalog-stat"><strong>Android</strong><span data-i18n="statPlatform">main platform</span></div>
         </div>
         <div class="catalog-jumps">
@@ -511,6 +527,27 @@
               </a>
             </div>
           </article>
+
+          <article class="game-card pentarove-card">
+            <a class="card-page-link" href="https://demavinsky.com.br/games/pentarove/" aria-label="PentaRove — página do jogo"></a>
+            <div class="game-topline">
+              <h3>PentaRove</h3>
+              <span class="status" data-i18n="availableNow">Available now</span>
+            </div>
+            <p class="game-description" data-i18n="pentaDescription">A daily word puzzle built around smart guesses, color clues and a satisfying path to the right answer.</p>
+            <div class="game-meta"><span class="meta-chip">Mobile</span><span class="meta-chip">Words</span><span class="meta-chip">Android</span></div>
+            <div class="card-actions">
+              <a class="button store-button" href="https://play.google.com/store/apps/details?id=com.demavinsky.wordpuzzle&hl=pt_BR" target="_blank" rel="noopener noreferrer">
+                <svg class="store-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="#34A853" d="M3.84 3.18c-.26.27-.42.67-.42 1.17v15.3c0 .5.16.9.42 1.17l.07.06 8.56-8.56v-.64L3.91 3.12l-.07.06Z"/>
+                <path fill="#4285F4" d="M16.33 15.18l-2.86-2.86v-.64l2.86-2.86.06.03 3.39 1.93c.97.55.97 1.45 0 2l-3.39 1.93-.06.07Z"/>
+                <path fill="#FBBC04" d="M16.39 15.11l-2.92-2.92-8.63 8.63c.4.35.99.39 1.66.01l9.89-5.72"/>
+                <path fill="#EA4335" d="M16.39 8.89 6.5 3.17c-.67-.38-1.26-.34-1.66.01l8.63 8.63 2.92-2.92Z"/>
+              </svg>
+                <span data-i18n="playStore">View on Google Play</span>
+              </a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -524,15 +561,7 @@
         </div>
 
         <div class="games-grid">
-          <article class="game-card">
-            <div class="game-topline">
-              <h3>PentaRove</h3>
-              <span class="status" data-i18n="comingSoon">Coming soon</span>
-            </div>
-            <p class="game-description" data-i18n="pentaDescription">A daily word puzzle built around smart guesses, color clues and a satisfying path to the right answer.</p>
-            <div class="game-meta"><span class="meta-chip">Mobile</span><span class="meta-chip">Words</span><span class="meta-chip">Android</span></div>
-            <p class="coming-note" data-i18n="developmentNote">In development. More information will be published as the project moves forward.</p>
-          </article>
+
 
           <article class="game-card">
             <div class="game-topline">
